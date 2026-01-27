@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerTransformState : playerState
 {
     private GameObject targetForm; // 目标形态对象
+    private int targetFormIndex; // 目标形态索引
     
     public playerTransformState(player _player, playerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -13,40 +14,45 @@ public class playerTransformState : playerState
     public override void Enter()
     {
         base.Enter();
-        // 动画播放完成后会触发AnimEvent
+        // 播放形态切换动画
+        Debug.Log($"开始形态切换动画");
     }
 
     public override void Exit()
     {
+        Debug.Log($"结束形态切换动画");
         base.Exit();
     }
 
     public override void Update()
     {
         base.Update();
-        
-        // 动画播放完成后自动退出（通过AnimEvent触发）
+        // 等待动画播放完成（通过AnimEvent触发CompleteTransform）
     }
     
-    public void SetTargetForm(GameObject form)
+    public void SetTargetForm(GameObject form, int formIndex)
     {
         targetForm = form;
+        targetFormIndex = formIndex;
     }
     
-    // 在动画结束时调用（通过AnimEvent）
+    // 在动画结束时调用（通过AnimEvent触发）
     public void CompleteTransform()
     {
         if (targetForm != null)
         {
-            // 将目标形态移动到当前玩家位置
-            targetForm.transform.position = player.transform.position;
+            // 激活目标形态
             targetForm.SetActive(true);
             
-            // 将当前玩家移到远处
-            player.transform.position = new Vector3(10000f, 10000f, 0f);
+            // 通过Manager切换控制权和位置
+            PlayerFormManager.Instance.SwitchControl(targetForm, targetFormIndex);
             
-            // 切换控制权
-            PlayerFormManager.Instance.SwitchControl(targetForm);
+            // 返回idle状态
+            player newPlayer = targetForm.GetComponent<player>();
+            if (newPlayer != null)
+            {
+                newPlayer.stateMachine.ChangeState(newPlayer.idleState);
+            }
         }
     }
 }
