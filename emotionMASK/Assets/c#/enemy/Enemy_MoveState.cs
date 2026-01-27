@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Enemy_MoveState : EnemyState
+public class Enemy_MoveState : Enemy_GroundedState
 {
     public Enemy_MoveState(Enemy enemybase, EnemyStateMachine stateMachine, string animBoolName) : base(enemybase, stateMachine, animBoolName)
     {
@@ -14,7 +14,7 @@ public class Enemy_MoveState : EnemyState
     {
         base.Enter();
 
-        if (!enemybase.isGrounded)
+        if (!enemybase.isGrounded || enemybase.isTouchingTheWall)
             enemybase.Flip();
     }
 
@@ -24,7 +24,7 @@ public class Enemy_MoveState : EnemyState
 
         enemybase.SetVelocity(enemybase.moveSpeed * enemybase.EntityDirection, enemybase.rb.velocity.y);
 
-        if (!enemybase.isGrounded)
+        if (!enemybase.isGrounded || enemybase.isTouchingTheWall)
             stateMachine.ChangeState(enemybase.idleState);
     }
 }

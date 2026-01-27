@@ -59,6 +59,11 @@ public class Enemy : MonoBehaviour,IDamageable
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header("玩家检测")]
+    [SerializeField] private Transform playerCheckPoint;
+    [SerializeField] private float playerCheckDistance;
+    [SerializeField] private LayerMask whatIsPlayer;
+
 
     //states
     public Enemy_IdleState idleState { get; private set;}
@@ -69,6 +74,10 @@ public class Enemy : MonoBehaviour,IDamageable
 
     protected virtual void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         stateMachine = new EnemyStateMachine();
 
         idleState = new Enemy_IdleState(this, stateMachine, "idle");
@@ -84,10 +93,6 @@ public class Enemy : MonoBehaviour,IDamageable
     }
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
         currentHealth = maxHealth;
 
         #region
@@ -249,9 +254,22 @@ public class Enemy : MonoBehaviour,IDamageable
         isTouchingTheWall = Physics2D.Raycast(wallCheckPoint.position, Vector3.right * EntityDirection, wallCheckDistance, wallLayer);
     }
 
+
+    public RaycastHit2D PlayerDetection()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(playerCheckPoint.position, Vector3.right * EntityDirection, playerCheckDistance, 
+            whatIsPlayer | wallLayer);
+
+        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+            return default;
+
+        return hit;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheckPoint.position, groundCheckPoint.position + new Vector3(0, -groundCheckDistance));
         Gizmos.DrawLine(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance * EntityDirection, 0, 0));
+        Gizmos.DrawLine(playerCheckPoint.position, playerCheckPoint.position + new Vector3(playerCheckDistance * EntityDirection, 0, 0));
     }
 }

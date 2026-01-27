@@ -37,12 +37,12 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
     {
         base.Update();
 
-        //// 定时治疗周围敌人
-        //if (Time.time > lastHealTime + healInterval)
-        //{
-        //    TryHealNearbyEnemies();
-        //    lastHealTime = Time.time;
-        //}
+        // 定时治疗周围敌人
+        if (Time.time > lastHealTime + healInterval)
+        {
+            TryHealNearbyEnemies();
+            lastHealTime = Time.time;
+        }
     }
 
     //可选的特殊效果
