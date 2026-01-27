@@ -16,6 +16,7 @@ public class playerMoveState : playerState
     public override void Update()
     {
         base.Update();
+        Debug.Log("移动状态更新");
         
         // 检测是否离开地面
         if(!player.IsGroundDetected())
@@ -24,7 +25,7 @@ public class playerMoveState : playerState
             return;
         }
         
-        player.SetVelocity(xInput * player.moveSpeed, player.rb.velocity.y);
+        player.SetVelocity(xInput * playerStateManager.moveSpeed, player.rb.velocity.y);
         
         if(xInput == 0)
             stateMachine.ChangeState(player.idleState);  

@@ -12,7 +12,7 @@ public class playerJumpState : playerState
     public override void Enter()
     {
         base.Enter();
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce); //设置跳跃速度
+        player.rb.velocity = new Vector2(player.rb.velocity.x, playerStateManager.jumpForce); //设置跳跃速度
     }
     public override void Update()
     {
@@ -21,7 +21,7 @@ public class playerJumpState : playerState
         // 添加空中水平移动
         if(xInput != 0)
         {
-            player.SetVelocity(player.moveSpeed * xInput * 0.8f, player.rb.velocity.y);
+            player.SetVelocity(playerStateManager.moveSpeed * xInput * 0.8f, player.rb.velocity.y);
         }
         
         if(player.rb.velocity.y < 0)

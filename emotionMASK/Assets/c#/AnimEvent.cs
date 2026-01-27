@@ -25,6 +25,7 @@ public class AnimEvent : MonoBehaviour
         hitTriggered = true;
         
     }
+    
 
     // 在动画关键帧调用：关闭判定
     public void DisableHitbox()
@@ -41,7 +42,6 @@ public class AnimEvent : MonoBehaviour
     player playerScript = GetComponentInParent<player>();
     if (playerScript != null)
     {
-        playerScript.canChangeState = true;
         playerScript.transformState.CompleteTransform();
     }
 }

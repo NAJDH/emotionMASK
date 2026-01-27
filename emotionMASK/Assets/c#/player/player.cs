@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour, IDamageable
 {
-    public bool canChangeState;             //管理变身
     public AnimEvent animEvent;
-    [Header("移动参数")]
-    public float moveSpeed = 10f;
-    public float jumpForce = 16f;
     [Header("地面检测")]
     public Transform groundCheck;
     public float groundCheckRange = 0.2f;
@@ -52,6 +48,8 @@ public class player : MonoBehaviour, IDamageable
     protected void Update() 
     {
         stateMachine.currentState.Update();
+        Debug.Log($"当前状态：{stateMachine.currentState}");
+        playerStateManager.Update(); // 更新形态管理器
     }
     public void TakeDamage(float amount, MaskType attackerMask)
     {

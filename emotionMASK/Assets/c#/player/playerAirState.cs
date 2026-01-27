@@ -22,7 +22,7 @@ public class playerAirState : playerState
         }
         if(xInput != 0)
         {
-            player.SetVelocity(player.moveSpeed * xInput * 0.8f, player.rb.velocity.y);
+            player.SetVelocity(playerStateManager.moveSpeed * xInput * 0.8f, player.rb.velocity.y);
         }
         // if (player.IsWallDetected())
         // {

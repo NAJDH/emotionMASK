@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class PlayerFormManager : MonoBehaviour
 {
-    public static PlayerFormManager Instance { get; private set; }
+    public static PlayerFormManager playerForm { get; private set; }
     
     [Header("四种玩家形态")]
     public GameObject form1; // 形态1
@@ -24,8 +24,8 @@ public class PlayerFormManager : MonoBehaviour
     
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (playerForm == null)
+            playerForm = this;
         else
             Destroy(gameObject);
             

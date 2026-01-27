@@ -46,7 +46,7 @@ public class playerTransformState : playerState
             targetForm.SetActive(true);
             
             // 通过Manager切换控制权和位置
-            PlayerFormManager.Instance.SwitchControl(targetForm, targetFormIndex);
+            PlayerFormManager.playerForm.SwitchControl(targetForm, targetFormIndex);
             
             // 返回idle状态
             player newPlayer = targetForm.GetComponent<player>();
