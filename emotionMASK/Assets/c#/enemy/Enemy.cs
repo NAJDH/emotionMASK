@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamageable
 {
     public int EntityDirection{get; private set;} = 1;
     private bool isFacingRight = true;
@@ -21,6 +21,10 @@ public class Enemy : MonoBehaviour
     protected void Update()
     {
         stateMachine.currentState.Update();
+    }
+        public void TakeDamage(float amount, MaskType attackerMask)
+    {
+        Debug.Log($"Enemy took {amount} damage from {attackerMask} mask.");
     }
     #region 翻转函数
     public void Flip()

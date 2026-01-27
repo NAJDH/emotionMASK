@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class player : MonoBehaviour, IDamageable
 {
     public AnimEvent animEvent;
     [Header("移动参数")]
@@ -49,7 +49,10 @@ public class player : MonoBehaviour
     protected void Update() 
     {
         stateMachine.currentState.Update();
-        Debug.Log($"State: {stateMachine.currentState.GetType().Name}");
+    }
+    public void TakeDamage(float amount, MaskType attackerMask)
+    {
+        Debug.Log($"Player took {amount} damage from {attackerMask} mask.");
     }
 
 
