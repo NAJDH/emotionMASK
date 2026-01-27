@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour,IDamageable
     [Header("移动参数")]
     public float moveSpeed = 6f;
     public float idleTime;
+    [Range(0, 2)]
+    public float moveAnimSpeedMultiplier = 1;
 
     //physics
     [Header("物理检测")]

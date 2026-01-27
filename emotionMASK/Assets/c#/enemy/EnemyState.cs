@@ -23,6 +23,8 @@ public class EnemyState
     public virtual void Update()                      //更新状态
     {
         stateTimer -= Time.deltaTime;
+
+        enemybase.anim.SetFloat("moveAnimSpeedMultiplier", enemybase.moveAnimSpeedMultiplier);
     }
     public virtual void Exit()                        //退出状态
     {
