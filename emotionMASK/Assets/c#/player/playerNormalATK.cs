@@ -16,7 +16,6 @@ public class playerNormalATK : playerState
     public override void Enter()
     {
         base.Enter();
-        HitStopManager.Instance.PlayHitStop();
         player.SetVelocity(0f, player.rb.velocity.y);
         if (normalATKHitbox != null) normalATKHitbox.enabled = false; // 进入时确保关闭
     }

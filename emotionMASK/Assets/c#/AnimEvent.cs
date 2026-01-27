@@ -45,4 +45,10 @@ public class AnimEvent : MonoBehaviour
         playerScript.transformState.CompleteTransform();
     }
 }
+    public void ceshi()
+    {
+        //这个是用来测试顿帧，镜头震动和音效的动画事件
+        HitStopManager.Instance.PlayHitStop();
+        
+    }
 }
