@@ -9,20 +9,47 @@ public class Enemy : MonoBehaviour,IDamageable
     public Animator anim{get; private set;}
     public Rigidbody2D rb{get; private set;}
     protected EnemyStateMachine stateMachine;
+
+    [Header("移动参数")]
+    public float moveSpeed = 6f;
+    public float idleTime;
+
+    //physics
+    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private float radius;
+    public bool isGrounded;
+    [SerializeField] private Transform wallCheckPoint;
+    [SerializeField] private float wallCheckDistance;
+    public bool isTouchingTheWall;
+    [SerializeField] private LayerMask groundLayer;
+
+    //state
+    public Enemy_IdleState idleState { get; private set;}
+    public Enemy_MoveState moveState { get; private set;}
+
+
     protected void Awake()
     {
         stateMachine = new EnemyStateMachine();
+
+        idleState = new Enemy_IdleState(this, stateMachine, "idle");
+        moveState = new Enemy_MoveState(this, stateMachine, "move");
     }
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+
+        stateMachine.Initialize(idleState);
     }
     protected void Update()
     {
         stateMachine.currentState.Update();
+
+        PhysicsCheck();
     }
-        public void TakeDamage(float amount, MaskType attackerMask)
+
+    public void TakeDamage(float amount, MaskType attackerMask)
     {
         Debug.Log($"Enemy took {amount} damage from {attackerMask} mask.");
     }
@@ -39,14 +66,33 @@ public class Enemy : MonoBehaviour,IDamageable
         else if(x < 0 && isFacingRight) Flip();
     }
     #endregion
+
+    public void SetVelocity(float x, float y)
+    {
+        rb.velocity = new Vector2(x, y);
+    }
+
     public void SetZeroVelocity()
     {
         // if(isknockback) return;//受击击退的时候不会有其他速度
 
         rb.velocity = new Vector2(0f, rb.velocity.y);
     }
+
     public void Damage()
     {
         Debug.Log("Enemy Hit!");
+    }
+
+    private void PhysicsCheck()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, radius, groundLayer);
+        isTouchingTheWall = Physics2D.Raycast(wallCheckPoint.position, transform.localScale, wallCheckDistance);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(groundCheckPoint.position, radius);
+        Gizmos.DrawRay(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance, 0, 0));
     }
 }
