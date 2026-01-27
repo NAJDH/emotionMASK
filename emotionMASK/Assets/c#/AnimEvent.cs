@@ -31,4 +31,12 @@ public class AnimEvent : MonoBehaviour
     {
         hitTriggered = false;
     }
+    public void TriggerTransformComplete()
+{
+    player playerScript = GetComponentInParent<player>();
+    if (playerScript != null && playerScript.transformState != null)
+    {
+        playerScript.transformState.CompleteTransform();
+    }
+}
 }
