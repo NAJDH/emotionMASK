@@ -148,7 +148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17443118}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a4290e4377e6e54390f93d9e653f196, type: 3}
   m_Name: 
@@ -2826,7 +2826,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721944770}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a4290e4377e6e54390f93d9e653f196, type: 3}
   m_Name: 
@@ -3090,6 +3090,7 @@ MonoBehaviour:
   form3: {fileID: 1721944770}
   form4: {fileID: 17443118}
   currentFormIndex: 1
+  activeCamera: {fileID: 1040653008}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

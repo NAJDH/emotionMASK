@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerFormManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerFormManager : MonoBehaviour
     
     private GameObject currentPlayerForm; // 当前控制的形态对象
     private Dictionary<int, GameObject> formDictionary; // 形态字典
+    // 【第二步：添加摄像机引用】
+    [Header("摄像机设置")]
+    public CinemachineVirtualCamera activeCamera; // 记得在 Inspector 里把你的 CM vcam1 拖进去
     
     private void Awake()
     {
@@ -39,23 +43,36 @@ public class PlayerFormManager : MonoBehaviour
             { 4, form4 }
         };
         
+        // **关键修改：先激活所有形态，让它们完成初始化**
+        foreach (var form in formDictionary.Values)
+        {
+            if (form != null)
+            {
+                form.SetActive(true);
+            }
+        }
+        
+        // 等待一帧后再隐藏
+        StartCoroutine(InitializeFormsDelayed());
+    }
+    
+    private IEnumerator InitializeFormsDelayed()
+    {
+        yield return null; // 等待一帧，让所有Awake和Start执行
+        
         // 设置初始形态
         currentPlayerForm = formDictionary[currentFormIndex];
         
-        // 禁用其他形态的控制 - 改为隐藏整个物体
+        // 隐藏其他形态
         foreach (var form in formDictionary.Values)
         {
             if (form != null && form != currentPlayerForm)
             {
-                form.SetActive(false); // 直接隐藏整个GameObject
+                form.SetActive(false);
             }
         }
         
-        // 启用当前形态
-        if (currentPlayerForm != null)
-        {
-            currentPlayerForm.SetActive(true); // 确保当前形态是激活的
-        }
+        Debug.Log("所有形态初始化完成");
     }
     
     private void Update()
@@ -126,15 +143,59 @@ public class PlayerFormManager : MonoBehaviour
         // 启用新形态 - 改为激活整个物体
         currentPlayerForm.SetActive(true);
         
-        // 更新摄像机跟随目标（如果有）
-        UpdateCameraTarget();
+        // 延迟切换状态，确保Awake已执行
+        StartCoroutine(DelayedStateChange());
         
         Debug.Log($"已切换到形态{newFormIndex}");
+    }
+    
+    private IEnumerator DelayedStateChange()
+    {
+        yield return null; // 只需等待一帧
+        
+        player newPlayer = currentPlayerForm.GetComponent<player>();
+        if (newPlayer != null)
+        {
+            // 因为已经预初始化过，所以状态机应该已经存在
+            if (newPlayer.stateMachine != null && newPlayer.idleState != null)
+            {
+                // 如果当前状态为空，先初始化
+                if (newPlayer.stateMachine.currentState == null)
+                {
+                    newPlayer.stateMachine.Initialize(newPlayer.idleState);
+                }
+                else
+                {
+                    newPlayer.stateMachine.ChangeState(newPlayer.idleState);
+                }
+                Debug.Log($"形态{currentFormIndex}状态切换完成");
+            }
+            else
+            {
+                Debug.LogError($"形态{currentFormIndex}的状态机或idleState为空！");
+            }
+        }
+        
+        UpdateCameraTarget();
     }
     
     private void UpdateCameraTarget()
     {
         // 如果你有摄像机跟随脚本，在这里更新目标
         // 例如: CameraFollow.Instance.SetTarget(currentPlayerForm.transform);
+        if (activeCamera != null && currentPlayerForm != null)
+        {
+            // 告诉摄像机：现在的跟随目标是当前的主角
+            activeCamera.Follow = currentPlayerForm.transform;
+
+            // 如果你的游戏需要 LookAt (通常 3D 需要，2D 不需要)，把下面这行取消注释
+            // activeCamera.LookAt = currentPlayerForm.transform; 
+            
+            Debug.Log($"摄像机已跟随: {currentPlayerForm.name}");
+        }
+        else
+        {
+            Debug.LogWarning("摄像机或当前角色为空，无法跟随！");
+        }
     }
 }
