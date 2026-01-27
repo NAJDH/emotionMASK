@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_IdleState : EnemyState
+public class Enemy_IdleState : Enemy_GroundedState
 {
     public Enemy_IdleState(Enemy enemybase, EnemyStateMachine stateMachine, string animBoolName) : base(enemybase, stateMachine, animBoolName)
     {
