@@ -33,9 +33,15 @@ public class AnimEvent : MonoBehaviour
     }
     public void TriggerTransformComplete()
 {
+    // player playerScript = GetComponentInParent<player>();
+    // if (playerScript != null && playerScript.transformState != null)
+    // {
+    //     playerScript.transformState.CompleteTransform();
+    // }
     player playerScript = GetComponentInParent<player>();
-    if (playerScript != null && playerScript.transformState != null)
+    if (playerScript != null)
     {
+        playerScript.canChangeState = true;
         playerScript.transformState.CompleteTransform();
     }
 }

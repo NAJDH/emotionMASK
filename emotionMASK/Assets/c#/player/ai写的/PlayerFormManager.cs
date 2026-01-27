@@ -42,21 +42,19 @@ public class PlayerFormManager : MonoBehaviour
         // 设置初始形态
         currentPlayerForm = formDictionary[currentFormIndex];
         
-        // 禁用其他形态的控制
+        // 禁用其他形态的控制 - 改为隐藏整个物体
         foreach (var form in formDictionary.Values)
         {
             if (form != null && form != currentPlayerForm)
             {
-                player p = form.GetComponent<player>();
-                if (p != null) p.enabled = false;
+                form.SetActive(false); // 直接隐藏整个GameObject
             }
         }
         
         // 启用当前形态
         if (currentPlayerForm != null)
         {
-            player currentPlayer = currentPlayerForm.GetComponent<player>();
-            if (currentPlayer != null) currentPlayer.enabled = true;
+            currentPlayerForm.SetActive(true); // 确保当前形态是激活的
         }
     }
     
@@ -110,14 +108,10 @@ public class PlayerFormManager : MonoBehaviour
     
     public void SwitchControl(GameObject newForm, int newFormIndex)
     {
-        // 禁用当前形态的控制
+        // 禁用当前形态 - 改为隐藏整个物体
         if (currentPlayerForm != null)
         {
-            player oldPlayer = currentPlayerForm.GetComponent<player>();
-            if (oldPlayer != null)
-            {
-                oldPlayer.enabled = false;
-            }
+            currentPlayerForm.SetActive(false);
         }
         
         // 交换位置
@@ -129,12 +123,8 @@ public class PlayerFormManager : MonoBehaviour
         currentPlayerForm = newForm;
         currentFormIndex = newFormIndex;
         
-        // 启用新形态的控制
-        player newPlayer = currentPlayerForm.GetComponent<player>();
-        if (newPlayer != null)
-        {
-            newPlayer.enabled = true;
-        }
+        // 启用新形态 - 改为激活整个物体
+        currentPlayerForm.SetActive(true);
         
         // 更新摄像机跟随目标（如果有）
         UpdateCameraTarget();

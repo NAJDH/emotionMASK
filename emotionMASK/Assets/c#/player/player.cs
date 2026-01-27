@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour, IDamageable
 {
+    public bool canChangeState;             //管理变身
     public AnimEvent animEvent;
     [Header("移动参数")]
     public float moveSpeed = 10f;
@@ -37,7 +38,7 @@ public class player : MonoBehaviour, IDamageable
         airState  = new playerAirState (this, stateMachine, "jump");
         normalATKState = new playerNormalATK(this, stateMachine, "normalATK");
         transformState = new playerTransformState(this, stateMachine, "transform"); // 初始化形态切换状态
-        //单例模式
+        // 单例模式
         // if(Instance == null)
         //     Instance = this;
         // else

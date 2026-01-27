@@ -14,6 +14,7 @@ public class playerTransformState : playerState
     public override void Enter()
     {
         base.Enter();
+        player.SetVelocity(0,0); // 进入形态切换状态时停止移动
         // 播放形态切换动画
         Debug.Log($"开始形态切换动画");
     }
