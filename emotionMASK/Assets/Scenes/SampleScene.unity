@@ -1150,6 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   idleTime: 2
+  moveAnimSpeedMultiplier: 1
   groundCheckPoint: {fileID: 1659965264}
   groundCheckDistance: 0.5
   isGrounded: 0
