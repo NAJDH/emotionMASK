@@ -9,6 +9,9 @@ public class EnemyState
     protected Enemy enemybase;
     protected string animBoolName;
     protected float stateTimer;
+
+    protected bool movementOver;
+    
     public EnemyState(Enemy enemybase, EnemyStateMachine stateMachine, string animBoolName)
     {
         this.enemybase = enemybase;                           
@@ -18,12 +21,14 @@ public class EnemyState
     #region 状态机的三个核心函数
     public virtual void Enter()                       //进入状态
     {
+        movementOver = false;
         enemybase.anim.SetBool(animBoolName, true);
     }
     public virtual void Update()                      //更新状态
     {
         stateTimer -= Time.deltaTime;
 
+        enemybase.anim.SetFloat("xVelocity", enemybase.rb.velocity.x);
         enemybase.anim.SetFloat("moveAnimSpeedMultiplier", enemybase.moveAnimSpeedMultiplier);
     }
     public virtual void Exit()                        //退出状态
@@ -31,4 +36,9 @@ public class EnemyState
         enemybase.anim.SetBool(animBoolName, false);
     }
     #endregion
+
+    public void MovementOver()
+    {
+        movementOver = true;
+    }
 }
