@@ -62,8 +62,8 @@ public class player : MonoBehaviour, IDamageable
         FilpController(xVelocity);
     }
     #region 翻转角色相关参数和函数
-    private bool isFacingRight = true;
-    private int playerDirection = 1;
+    private bool isFacingRight = false;
+    private int playerDirection = -1;
     public void Flip()
     {
         playerDirection *= -1;
