@@ -10,16 +10,21 @@ public class Enemy_MoveState : EnemyState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        if (!enemybase.isGrounded)
+            enemybase.Flip();
+    }
+
     public override void Update()
     {
         base.Update();
 
         enemybase.SetVelocity(enemybase.moveSpeed * enemybase.EntityDirection, enemybase.rb.velocity.y);
 
-        if (enemybase.isGrounded == false)
-        {
+        if (!enemybase.isGrounded)
             stateMachine.ChangeState(enemybase.idleState);
-            enemybase.Flip();
-        }
     }
 }

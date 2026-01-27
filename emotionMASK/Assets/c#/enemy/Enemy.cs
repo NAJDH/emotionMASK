@@ -15,13 +15,15 @@ public class Enemy : MonoBehaviour,IDamageable
     public float idleTime;
 
     //physics
+    [Header("物理检测")]
     [SerializeField] private Transform groundCheckPoint;
-    [SerializeField] private float radius;
+    [SerializeField] private float groundCheckDistance;
     public bool isGrounded;
     [SerializeField] private Transform wallCheckPoint;
     [SerializeField] private float wallCheckDistance;
     public bool isTouchingTheWall;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
 
     //state
     public Enemy_IdleState idleState { get; private set;}
@@ -86,13 +88,13 @@ public class Enemy : MonoBehaviour,IDamageable
 
     private void PhysicsCheck()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, radius, groundLayer);
-        isTouchingTheWall = Physics2D.Raycast(wallCheckPoint.position, transform.localScale, wallCheckDistance);
+        isGrounded = Physics2D.Raycast(groundCheckPoint.position, Vector3.down, groundCheckDistance);
+        isTouchingTheWall = Physics2D.Raycast(wallCheckPoint.position, Vector3.right * EntityDirection, wallCheckDistance, wallLayer);
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(groundCheckPoint.position, radius);
-        Gizmos.DrawRay(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance, 0, 0));
+        Gizmos.DrawLine(groundCheckPoint.position, groundCheckPoint.position + new Vector3(0, -groundCheckDistance));
+        Gizmos.DrawLine(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance * EntityDirection, 0, 0));
     }
 }

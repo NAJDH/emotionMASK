@@ -12,6 +12,8 @@ public class Enemy_IdleState : EnemyState
     {
         base.Enter();
 
+        enemybase.SetVelocity(0, enemybase.rb.velocity.y);
+
         stateTimer = enemybase.idleTime;
     }
 
