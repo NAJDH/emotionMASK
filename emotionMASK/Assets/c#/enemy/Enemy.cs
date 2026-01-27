@@ -69,6 +69,10 @@ public class Enemy : MonoBehaviour,IDamageable
 
     protected virtual void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         stateMachine = new EnemyStateMachine();
 
         idleState = new Enemy_IdleState(this, stateMachine, "idle");
@@ -84,10 +88,6 @@ public class Enemy : MonoBehaviour,IDamageable
     }
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
         currentHealth = maxHealth;
 
         #region
