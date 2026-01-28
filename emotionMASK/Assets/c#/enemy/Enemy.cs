@@ -221,7 +221,7 @@ public class Enemy : MonoBehaviour,IDamageable
 
     public void TakeDamage(float amount, MaskType attackerMask)
     {
-        Debug.Log($"Enemy took {amount} damage from {attackerMask} mask.");
+        Debug.Log($"Enemy took {amount} damage.");
     }
     #region 翻转函数
     public void Flip()

@@ -1,27 +1,27 @@
-// AngerEnemy.cs - Å­ÐÎÌ¬µÐÈË
+// AngerEnemy.cs - Å­ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
 using UnityEngine;
 
 public class AngerEnemy : Enemy, IFixedFormEnemy
 {
-    [Header("Å­ÐÎÌ¬ÌØÓÐÊôÐÔ")]
+    [Header("Å­ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float rageDamageMultiplier = 1.5f;
     [SerializeField] private float rageSpeedMultiplier = 1.3f;
-    [SerializeField] private float rageThreshold = 0.5f; // ÑªÁ¿µÍÓÚ50%½øÈë±©Å­
+    [SerializeField] private float rageThreshold = 0.5f; // Ñªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½50%ï¿½ï¿½ï¿½ë±©Å­
     [SerializeField] private ParticleSystem rageEffect;
 
     private bool isRaging = false;
 
     public MaskType FixedForm => MaskType.Anger;
-    public string EnemyTypeName => "Å­Ö®Õ½¹í";
+    public string EnemyTypeName => "Å­Ö®Õ½ï¿½ï¿½";
 
     protected override void Awake()
     {
         base.Awake();
 
-        // Å­ÐÎÌ¬Íâ¹Û
+        // Å­ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = new Color(1f, 0.5f, 0.5f); // ºìÉ«µ÷
+            spriteRenderer.color = new Color(1f, 0.5f, 0.5f); // ï¿½ï¿½É«ï¿½ï¿½
         }
     }
 
@@ -29,16 +29,16 @@ public class AngerEnemy : Enemy, IFixedFormEnemy
     {
         base.Update();
 
-        // ¼ì²éÊÇ·ñÓ¦¸Ã½øÈë±©Å­×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ó¦ï¿½Ã½ï¿½ï¿½ë±©Å­×´Ì¬
         if (!isRaging && currentHealth / maxHealth < rageThreshold)
         {
             EnterRageMode();
         }
 
-        // ±©Å­×´Ì¬ÏÂµÄ¶îÍâÐÐÎª
+        // ï¿½ï¿½Å­×´Ì¬ï¿½ÂµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½Îª
         if (isRaging)
         {
-            // ¿ÉÄÜ»áÌí¼Ó¶îÍâµÄ¹¥»÷ÓûÍû»òÐÐÎª
+            // ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª
         }
     }
 
@@ -46,27 +46,27 @@ public class AngerEnemy : Enemy, IFixedFormEnemy
     {
         isRaging = true;
 
-        // ÔöÇ¿ÊôÐÔ
+        // ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½
         moveSpeed *= rageSpeedMultiplier;
-        // attackDamage Ôö¼ÓÂß¼­£¨Èç¹ûEnemyÀàÓÐattackDamageÊôÐÔ£©
+        // attackDamage ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Enemyï¿½ï¿½ï¿½ï¿½attackDamageï¿½ï¿½ï¿½Ô£ï¿½
 
-        // ±©Å­ÌØÐ§
+        // ï¿½ï¿½Å­ï¿½ï¿½Ð§
         if (rageEffect != null)
         {
             rageEffect.Play();
         }
 
-        // ¶¯»­±íÏÖ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         anim.SetBool("IsRaging", true);
-        Debug.Log($"{EnemyTypeName} ½øÈë±©Å­×´Ì¬£¡");
+        Debug.Log($"{EnemyTypeName} ï¿½ï¿½ï¿½ë±©Å­×´Ì¬ï¿½ï¿½");
     }
 
     public void OnFormAbilityTrigger()
     {
-        // Å­ÐÎÌ¬ÌØÊâÄÜÁ¦£º¿ñ±©³å·æ
-        Debug.Log($"{EnemyTypeName} ·¢¶¯¿ñ±©³å·æ£¡");
+        // Å­ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ±©³ï¿½ï¿½
+        Debug.Log($"{EnemyTypeName} ï¿½ï¿½ï¿½ï¿½ï¿½ñ±©³ï¿½æ£¡");
 
-        // ÏòÇ°³å·æ
+        // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
         StartCoroutine(ChargeAttack());
     }
 
@@ -86,14 +86,14 @@ public class AngerEnemy : Enemy, IFixedFormEnemy
         }
     }
 
-    // ÖØÐ´TakeDamage£¬Å­ÐÎÌ¬¶ÔÏ²ÐÎÌ¬ÓÐ¶îÍâÉËº¦
+    // ï¿½ï¿½Ð´TakeDamageï¿½ï¿½Å­ï¿½ï¿½Ì¬ï¿½ï¿½Ï²ï¿½ï¿½Ì¬ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ëºï¿½
     public new void TakeDamage(float amount, MaskType attackerMask)
     {
-        // ¼ÆËã¿ËÖÆ¹ØÏµ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¹ï¿½Ïµ
         if (attackerMask == MaskType.Joy && isRaging)
         {
-            // ±©Å­Ê±¶ÔÏ²ÐÎÌ¬¹¥»÷ÓÐÌØÊâ·´Ó¦
-            // ¿ÉÄÜ»á´¥·¢·´»÷»òÆäËûÐ§¹û
+            // ï¿½ï¿½Å­Ê±ï¿½ï¿½Ï²ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â·´Ó¦
+            // ï¿½ï¿½ï¿½Ü»á´¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
         }
 
         base.TakeDamage(amount, attackerMask);

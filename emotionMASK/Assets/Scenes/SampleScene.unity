@@ -384,6 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  hitEffectPrefab: {fileID: 0}
+  hasHitEnemy: 0
 --- !u!61 &28057833
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1186,7 +1188,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0049113035, y: 0}
+  m_Offset: {x: -0.04206562, y: 0.55421984}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1197,7 +1199,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1571622, y: 0.95661294}
+  m_Size: {x: 0.7732334, y: 2.0650527}
   m_EdgeRadius: 0
 --- !u!4 &320381936
 Transform:
@@ -2123,6 +2125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  hitEffectPrefab: {fileID: 0}
+  hasHitEnemy: 0
 --- !u!95 &597179078
 Animator:
   serializedVersion: 5
@@ -3059,9 +3063,6 @@ MonoBehaviour:
   battleLastDuration: 0
   minRetreatDistance: 0
   retreatVelocity: {x: 0, y: 0}
-  battleLastDuration: 5
-  minRetreatDistance: 1
-  retreatVelocity: {x: 0, y: 0}
 --- !u!95 &1042878145
 Animator:
   serializedVersion: 5
@@ -3130,6 +3131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  hitEffectPrefab: {fileID: 0}
+  hasHitEnemy: 0
 --- !u!61 &1054308554
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3756,6 +3759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  hitEffectPrefab: {fileID: 0}
+  hasHitEnemy: 0
 --- !u!61 &1383566775
 BoxCollider2D:
   m_ObjectHideFlags: 0

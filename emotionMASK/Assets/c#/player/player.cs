@@ -57,7 +57,7 @@ public class player : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float amount, MaskType attackerMask)
     {
-        Debug.Log($"Player took {amount} damage from {attackerMask} mask.");
+        Debug.Log($"Player took {amount} damage.");
     }
 
 

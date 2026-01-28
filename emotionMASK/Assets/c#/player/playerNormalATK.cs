@@ -17,13 +17,23 @@ public class playerNormalATK : playerState
     {
         base.Enter();
         Debug.Log("进入普通攻击状态");
-        player.SetVelocity(0f, player.rb.velocity.y);
+        stateTimer = 0.3f;
+
+        //播放音效（还没写）
+        //攻击框（Collider2D）在动画事件里控制开关
+
         if (normalATKHitbox != null) normalATKHitbox.enabled = false; // 进入时确保关闭
     }
 
     public override void Update()
     {
         base.Update();
+        //攻击的前一点点时间，让角色不完全直接停下来，优化手感
+        if(stateTimer < 0)
+        {
+        player.SetVelocity(0f, player.rb.velocity.y);
+            
+        }
         // if(playerStateManager.XI)
         // {
         //     player.anim.SetInteger("whoATK", 1);
