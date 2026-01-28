@@ -420,7 +420,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.24, y: 10.24}
+    oldSize: {x: 6.17, y: 7.97}
     newSize: {x: 7.75, y: 9.85}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3499,6 +3499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1325371119}
   - component: {fileID: 1325371120}
+  - component: {fileID: 1325371121}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3535,15 +3536,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - clip: {fileID: 8300000, guid: 98c4ec2fb2743a04694d23c05ff91e4a, type: 3}
-    outputGroup: {fileID: 0}
+    outputGroup: {fileID: -2297542478821290841, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
     volume: 1
     PlayerOnAwake: 1
     loop: 1
   - clip: {fileID: 8300000, guid: 585410ea211ad334385d532c73b234c8, type: 3}
-    outputGroup: {fileID: 0}
+    outputGroup: {fileID: 3615002605678062678, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
     volume: 1
     PlayerOnAwake: 0
     loop: 0
+--- !u!114 &1325371121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325371118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3007cf6c2a6582543aac1a7a4c6460dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
 --- !u!1 &1329500578
 GameObject:
   m_ObjectHideFlags: 0

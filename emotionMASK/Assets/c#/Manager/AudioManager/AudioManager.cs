@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+
+//外界音频调用的方法：AudioManager.PlayAudio("音频名称",是否等待当前音频播放完毕);
+
 /// <summary>
 /// 音频管理器，用来存储所有音频以及播放和停止
 /// </summary>
@@ -102,6 +105,10 @@ public class AudioManager : MonoBehaviour
             instance.audiosDic[name].Play();
         }
     }
+    /// <summary>
+    /// 停止播放某一个音频
+    /// </summary>
+    /// <param name="name">音频的名字</param>
     public static void StopAudio(string name)
     {
         if (!instance.audiosDic.ContainsKey(name))
