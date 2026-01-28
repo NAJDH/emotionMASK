@@ -3059,6 +3059,9 @@ MonoBehaviour:
   battleLastDuration: 0
   minRetreatDistance: 0
   retreatVelocity: {x: 0, y: 0}
+  battleLastDuration: 5
+  minRetreatDistance: 1
+  retreatVelocity: {x: 0, y: 0}
 --- !u!95 &1042878145
 Animator:
   serializedVersion: 5
