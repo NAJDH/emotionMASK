@@ -28,8 +28,11 @@ public class EnemyState
     {
         stateTimer -= Time.deltaTime;
 
+        float battleMoveSpeedMultiplier = enemybase.battleMoveSpeed / enemybase.moveSpeed; 
+
         enemybase.anim.SetFloat("xVelocity", enemybase.rb.velocity.x);
         enemybase.anim.SetFloat("moveAnimSpeedMultiplier", enemybase.moveAnimSpeedMultiplier);
+        enemybase.anim.SetFloat("battleMoveSpeedMultiplier", battleMoveSpeedMultiplier);
     }
     public virtual void Exit()                        //退出状态
     {
