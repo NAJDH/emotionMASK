@@ -20,7 +20,7 @@ public class UI_Manager
     //获取一个UI对象
     public GameObject GetSingleType(UIType type)
     {
-        GameObject parent = GameObject.Find("Canvas");
+        GameObject parent = GameObject.Find("Canvas(Panel)");
         
         if (!parent)
         {

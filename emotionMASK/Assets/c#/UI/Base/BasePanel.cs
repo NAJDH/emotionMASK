@@ -10,6 +10,24 @@ public class BasePanel
 {
     //UI信息
     public UIType uiType {  get; private set; }
+    //UI管理工具
+    public UI_Tool uiTool { get; private set; }
+    //面板管理器
+    public Panel_Manager panelManager { get; private set; }
+
+
+    //初始化uiTool
+    public void Initialize(UI_Tool tool)
+    {
+        uiTool = tool;
+    }
+
+
+    //初始化画面管理器
+    public void Initialize(Panel_Manager panelManager)
+    {
+        this.panelManager = panelManager;
+    }
 
 
     public BasePanel(UIType uiType)

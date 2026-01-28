@@ -31,6 +31,9 @@ public class Panel_Manager
         stackPanel.Push(nextPanel);
 
         GameObject panelGo = uiManager.GetSingleType(nextPanel.uiType);
+        nextPanel.Initialize(new UI_Tool(panelGo));
+        nextPanel.Initialize(this);
+        nextPanel.Enter();
     }
 
     //执行面板的出栈操作

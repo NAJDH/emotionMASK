@@ -32,7 +32,7 @@ public class EnemyState
 
         enemybase.anim.SetFloat("xVelocity", enemybase.rb.velocity.x);
         enemybase.anim.SetFloat("moveAnimSpeedMultiplier", enemybase.moveAnimSpeedMultiplier);
-        enemybase.anim.SetFloat("battleMoveSpeedMultiplier", battleMoveSpeedMultiplier);
+        enemybase.anim.SetFloat("battleMoveAnimSpeedMultiplier", battleMoveSpeedMultiplier);
     }
     public virtual void Exit()                        //退出状态
     {
