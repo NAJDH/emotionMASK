@@ -64,11 +64,19 @@ public class Enemy : MonoBehaviour,IDamageable
     [SerializeField] private float playerCheckDistance;
     [SerializeField] private LayerMask whatIsPlayer;
 
+    [Header("交战相关")]
+    public float battleMoveSpeed;
+    public float attackDistance;
+    public float battleLastDuration;
+    public float minRetreatDistance;
+    public Vector2 retreatVelocity;
+
 
     //states
     public Enemy_IdleState idleState { get; private set;}
-    public Enemy_MoveState moveState { get; private set;}
-    public Enemy_TransformState transformState { get; private set;}
+    public Enemy_MoveState moveState { get; private set; }
+    public Enemy_AttackState attackState { get; private set; }
+    // public Enemy_TransformState transformState { get; private set;}
     public Enemy_BattleState battleState { get; private set;}
 
 
@@ -82,6 +90,7 @@ public class Enemy : MonoBehaviour,IDamageable
 
         idleState = new Enemy_IdleState(this, stateMachine, "idle");
         moveState = new Enemy_MoveState(this, stateMachine, "move");
+        attackState = new Enemy_AttackState(this, stateMachine, "attack");
         battleState = new Enemy_BattleState(this, stateMachine, "battle");
         
         #region
@@ -107,6 +116,8 @@ public class Enemy : MonoBehaviour,IDamageable
         stateMachine.currentState.Update();
 
         PhysicsCheck();
+
+        
 
         #region
         //// 形态切换逻辑
@@ -238,7 +249,7 @@ public class Enemy : MonoBehaviour,IDamageable
         rb.velocity = new Vector2(0f, rb.velocity.y);
     }
 
-    public void MovementOver()
+    public void MovementOver()  //结束动作（如攻击）
     {
         stateMachine.currentState.MovementOver();
     }
@@ -255,7 +266,7 @@ public class Enemy : MonoBehaviour,IDamageable
     }
 
 
-    public RaycastHit2D PlayerDetection()
+    public RaycastHit2D PlayerDetected()  //检测视线内的玩家
     {
         RaycastHit2D hit = Physics2D.Raycast(playerCheckPoint.position, Vector3.right * EntityDirection, playerCheckDistance, 
             whatIsPlayer | wallLayer);
@@ -270,6 +281,12 @@ public class Enemy : MonoBehaviour,IDamageable
     {
         Gizmos.DrawLine(groundCheckPoint.position, groundCheckPoint.position + new Vector3(0, -groundCheckDistance));
         Gizmos.DrawLine(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance * EntityDirection, 0, 0));
+       
+        Gizmos.color = Color.yellow;
         Gizmos.DrawLine(playerCheckPoint.position, playerCheckPoint.position + new Vector3(playerCheckDistance * EntityDirection, 0, 0));
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(playerCheckPoint.position, playerCheckPoint.position + new Vector3(attackDistance * EntityDirection, 0, 0));
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(playerCheckPoint.position, playerCheckPoint.position + new Vector3(minRetreatDistance * EntityDirection, 0, 0));
     }
 }

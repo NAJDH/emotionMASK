@@ -13,6 +13,6 @@ public class Enemy_AttackState : EnemyState
         base.Update();
 
         if (movementOver)
-            stateMachine.ChangeState(enemybase.idleState);
+            stateMachine.ChangeState(enemybase.battleState);
     }
 }
