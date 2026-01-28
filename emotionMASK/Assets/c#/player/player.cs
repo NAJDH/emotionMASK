@@ -44,6 +44,10 @@ public class player : MonoBehaviour, IDamageable
     protected void Start() 
     {
         stateMachine.Initialize(idleState);         //这个函数在playerStateMachine里面有写，是初始化第一个状态的
+        
+        // 重置所有动画事件标志
+        animEvent.ResetAnimationEvent();
+        animEvent.DisableHitbox();
     }
     protected void Update() 
     {

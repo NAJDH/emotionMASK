@@ -24,22 +24,22 @@ public class playerNormalATK : playerState
     public override void Update()
     {
         base.Update();
-        if(playerStateManager.XI)
-        {
-            player.anim.SetInteger("whoATK", 1);
-        }
-        else if(playerStateManager.NU)
-        {
-            player.anim.SetInteger("whoATK", 2);
-        }
-        else if(playerStateManager.AI)
-        {
-            player.anim.SetInteger("whoATK", 3);
-        }
-        else if(playerStateManager.JU)
-        {
-            player.anim.SetInteger("whoATK", 4);
-        }
+        // if(playerStateManager.XI)
+        // {
+        //     player.anim.SetInteger("whoATK", 1);
+        // }
+        // else if(playerStateManager.NU)
+        // {
+        //     player.anim.SetInteger("whoATK", 2);
+        // }
+        // else if(playerStateManager.AI)
+        // {
+        //     player.anim.SetInteger("whoATK", 3);
+        // }
+        // else if(playerStateManager.JU)
+        // {
+        //     player.anim.SetInteger("whoATK", 4);
+        // }
         // 通过动画事件控制判定开关
         if (player.animEvent.hitTriggered && normalATKHitbox != null)
         {
@@ -62,6 +62,8 @@ public class playerNormalATK : playerState
     {
         Debug.Log("退出普通攻击状态");
         if (normalATKHitbox != null) normalATKHitbox.enabled = false;
+        // 重置动画事件标志，确保下次进入时能正常工作
+        player.animEvent.ResetAnimationEvent();
         base.Exit();
     }
 }

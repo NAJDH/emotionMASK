@@ -11,11 +11,13 @@ public class AnimEvent : MonoBehaviour
 
     public void TriggerAnimationEvent()
     {
+        Debug.Log("动画结束播放");
         AnimationTriggered = true;
     }
 
     public void ResetAnimationEvent()
     {
+        Debug.Log("动画正在播放");
         AnimationTriggered = false;
     }
 
