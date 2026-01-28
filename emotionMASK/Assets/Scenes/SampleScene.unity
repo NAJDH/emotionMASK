@@ -2972,6 +2972,9 @@ MonoBehaviour:
     m_Bits: 8
   battleMoveSpeed: 0
   attackDistance: 2
+  battleLastDuration: 5
+  minRetreatDistance: 1
+  retreatVelocity: {x: 0, y: 0}
 --- !u!95 &1042878145
 Animator:
   serializedVersion: 5
