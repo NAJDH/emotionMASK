@@ -16,6 +16,7 @@ public class playerNormalATK : playerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("进入普通攻击状态");
         player.SetVelocity(0f, player.rb.velocity.y);
         if (normalATKHitbox != null) normalATKHitbox.enabled = false; // 进入时确保关闭
     }
