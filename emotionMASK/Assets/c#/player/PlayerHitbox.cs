@@ -9,7 +9,7 @@ public class PlayerHitbox : MonoBehaviour
     // 标记是否已经命中敌人，防止多次触发，以及备用
     public bool hasHitEnemy = false;
 
-    private void Onenable()
+    private void OnEnable()
     {
         //初始化
         hasHitEnemy = false;

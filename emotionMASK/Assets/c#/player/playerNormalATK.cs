@@ -18,6 +18,7 @@ public class playerNormalATK : playerState
         base.Enter();
         Debug.Log("进入普通攻击状态");
         stateTimer = 0.3f;
+        HitStopManager.Instance.TriggerHitStop(2.0f, 0.2f, "PlayerAttackHit", false);
 
         //播放音效（还没写）
         //攻击框（Collider2D）在动画事件里控制开关
