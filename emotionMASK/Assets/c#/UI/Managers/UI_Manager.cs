@@ -33,6 +33,7 @@ public class UI_Manager
 
         GameObject ui = GameObject.Instantiate(Resources.Load<GameObject>(type.path), parent.transform);
         ui.name = type.name;
+        uiDic.Add(type, ui);
         return ui;
     }
 
@@ -42,7 +43,7 @@ public class UI_Manager
     {
         if(uiDic.ContainsKey(type))
         {
-            DestroyUI(type);
+            GameObject.Destroy(uiDic[type]);
             uiDic.Remove(type);
         }
     }

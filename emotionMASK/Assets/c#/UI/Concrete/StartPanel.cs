@@ -20,11 +20,18 @@ public class StartPanel : BasePanel
     {
         base.Enter();
 
+        uiTool.GetOrAddComponentInChildren<Button>("gameTutorButton").onClick.AddListener(() =>
+        {
+            //按钮点击事件
+            Debug.Log("The game-tutor-button was clicked!");
+            panelManager.Push(new TutorPanel());
+        });
+
         uiTool.GetOrAddComponentInChildren<Button>("gameStartButton").onClick.AddListener(() =>
         {
             //按钮点击事件
             Debug.Log("The game-start-button was clicked!");
+            //GameRoot.Instance.sceneSystem.SetScene(new MainScene());
         });
     }
-
 }

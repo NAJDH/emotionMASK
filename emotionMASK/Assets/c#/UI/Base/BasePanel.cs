@@ -14,6 +14,8 @@ public class BasePanel
     public UI_Tool uiTool { get; private set; }
     //面板管理器
     public Panel_Manager panelManager { get; private set; }
+    //UI管理器
+    public UI_Manager uiManager { get; private set; }
 
 
     //初始化uiTool
@@ -30,6 +32,13 @@ public class BasePanel
     }
 
 
+    //初始化UI管理器
+    public void Initialize(UI_Manager uiManager)
+    {
+        this.uiManager = uiManager;
+    }
+
+
     public BasePanel(UIType uiType)
     {
         this.uiType = uiType;
@@ -43,16 +52,16 @@ public class BasePanel
 
     public virtual void Pause()  //UI暂停时执行的操作
     {
-
+        uiTool.GetOrAddComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public virtual void Resume()  //UI继续时的操作
     {
-
+        uiTool.GetOrAddComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
     public virtual void Exit()  // UI退出时的操作
     {
-
+        uiManager.DestroyUI(uiType);
     }
 }
