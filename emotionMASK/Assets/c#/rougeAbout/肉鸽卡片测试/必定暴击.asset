@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6bdd4dc0ed0fb4f8db26a361bb2c05, type: 3}
   m_Name: "\u5FC5\u5B9A\u66B4\u51FB"
   m_EditorClassIdentifier: 
-  upgradeName: 
-  description: 
+  upgradeName: "\u5FC5\u5B9A\u66B4\u51FB"
+  description: "\u9009\u62E9\u4E86\u8FD9\u4E2A\u5361\u7247\u4E4B\u540E\uFF0C\u4F60\u7684\u6240\u6709\u653B\u51FB\u5FC5\u5B9A\u66B4\u51FB"
   icon: {fileID: 0}
   type: 0
   value: 0
