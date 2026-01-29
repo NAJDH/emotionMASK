@@ -4861,6 +4861,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1325371119}
+  - {fileID: 1946457748}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1721944770
@@ -5361,7 +5362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7691bd97eb0613040bea84c2f47c7048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxAudioSource: {fileID: 1946457746}
   virtualCamera: {fileID: 1040653008}
 --- !u!4 &1946457748
 Transform:
@@ -5371,12 +5371,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946457745}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2009834, y: -2.4149532, z: -4.418463}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.242695, y: -1.0448234, z: -4.3938026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1694947351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1946457749
 MonoBehaviour:
@@ -5641,7 +5641,6 @@ SceneRoots:
   - {fileID: 368581471}
   - {fileID: 1510644618}
   - {fileID: 1042878141}
-  - {fileID: 1946457748}
   - {fileID: 614037631}
   - {fileID: 1040653009}
   - {fileID: 1677397559}
