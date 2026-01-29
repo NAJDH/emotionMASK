@@ -162,7 +162,7 @@ public class HitStopManager : MonoBehaviour
         StartCoroutine(DoCameraShake(shakeIntensity, shakeTime));
     }
     /// <summary>
-    /// 只有顿帧没有音效和震动
+    /// 只有震动没有音效和顿帧
     /// </summary>
     /// <param name="shakeIntensity">震动幅度</param>
     /// <param name="shakeTime">震动时间</param>
