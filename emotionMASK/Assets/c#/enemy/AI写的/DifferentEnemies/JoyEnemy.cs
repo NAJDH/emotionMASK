@@ -80,7 +80,7 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
     }
 
     // 重写 TakeDamage，喜形态对哀形态有抗性
-    public new void TakeDamage(float amount, MaskType attackerMask)
+    public override void TakeDamage(float amount, MaskType attackerMask)
     {
         // 计算克制关系
         if (attackerMask == MaskType.Sorrow)
