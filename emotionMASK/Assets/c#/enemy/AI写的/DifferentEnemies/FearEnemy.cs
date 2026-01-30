@@ -149,7 +149,7 @@ public class FearEnemy : Enemy, IFixedFormEnemy
     }
 
     // ��дTakeDamage������ʱ����
-    public override void TakeDamage(float amount, MaskType attackerMask)
+    public override void TakeDamage(float amount)
     {
         if (isInvisible)
         {
