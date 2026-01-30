@@ -65,7 +65,6 @@ public class Enemy : MonoBehaviour,IDamageable
     [SerializeField] private Transform playerCheckPoint;
     [SerializeField] private float playerCheckDistance;
     [SerializeField] private LayerMask whatIsPlayer;
-    [SerializeField] private float attackAreaRadius;
 
     [Header("交战相关")]
     public float battleMoveSpeed;
@@ -76,7 +75,7 @@ public class Enemy : MonoBehaviour,IDamageable
     private bool isDead;
 
     [Header("检测目标")]
-    [SerializeField] private Transform targetCheck;
+    [SerializeField] private Transform targetCheckPoint;
     [SerializeField] private float targetCheckRadius;
     [SerializeField] private LayerMask whatIsTarget;
 
@@ -227,30 +226,26 @@ public class Enemy : MonoBehaviour,IDamageable
     //}
     #endregion
 
-    //伤害相关
-    public virtual void TakeDamage(float amount, MaskType attackerMask)
+    //受击相关
+    public virtual void TakeDamage(float damage, MaskType attackerMask)
     {
-        if (currentHealth <= 0)
-        {
-            Die();
+        if (isDead)
             return;
-        }
-
-        if(!isDead)
-        {
-            Debug.Log($"Enemy took {amount} damage from {attackerMask}!!!");
-            currentHealth -= amount;
-        }
+        
+        ReduceHP(damage);
     }
-    public virtual void Damage(float amount)
+    protected void ReduceHP(float amount)
     {
-        Collider2D[] players = Physics2D.OverlapCircleAll(playerCheckPoint.position, attackAreaRadius);
-    }
+        currentHealth -= amount;
 
-    private void Die()
+        if (currentHealth <= 0)
+            Die();
+    }
+    protected void Die()
     {
         isDead = true;
     }
+
 
 
 
@@ -313,7 +308,7 @@ public class Enemy : MonoBehaviour,IDamageable
 
     private void OnDrawGizmos()
     {
-       // Gizmos.DrawSphere
+        Gizmos.DrawWireSphere(targetCheckPoint.position, targetCheckRadius);
 
         Gizmos.DrawLine(groundCheckPoint.position, groundCheckPoint.position + new Vector3(0, -groundCheckDistance));
         Gizmos.DrawLine(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance * EntityDirection, 0, 0));

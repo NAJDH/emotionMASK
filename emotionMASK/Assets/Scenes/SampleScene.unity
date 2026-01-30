@@ -1344,6 +1344,37 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!1 &330435879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 330435880}
+  m_Layer: 7
+  m_Name: TargetCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &330435880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330435879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.55, y: -1.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1042878141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &361691797
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,6 +2981,7 @@ Transform:
   - {fileID: 1329500579}
   - {fileID: 1156976715}
   - {fileID: 1165896324}
+  - {fileID: 330435880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1042878142
@@ -2984,7 +3016,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.22905445, y: -1.4955857}
+  m_Offset: {x: 0.12477207, y: -1.4955857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2995,7 +3027,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.6021366, y: 3.9911714}
+  m_Size: {x: 7.393572, y: 3.9911714}
   m_EdgeRadius: 0
 --- !u!50 &1042878143
 Rigidbody2D:
@@ -3059,12 +3091,16 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  attackAreaRadius: 0
   battleMoveSpeed: 6
-  attackDistance: 2
+  attackDistance: 1.1
   battleLastDuration: 5
   minRetreatDistance: 0
   retreatVelocity: {x: 0, y: 0}
+  targetCheckPoint: {fileID: 330435880}
+  targetCheckRadius: 0.5
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &1042878145
 Animator:
   serializedVersion: 5
