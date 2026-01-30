@@ -3038,7 +3038,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 0
-  moveSpeed: 6
+  damageValue: 0
+  moveSpeed: 4
   idleTime: 0
   moveAnimSpeedMultiplier: 1
   groundCheckPoint: {fileID: 1329500579}
@@ -3058,7 +3059,8 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  battleMoveSpeed: 0
+  attackAreaRadius: 0
+  battleMoveSpeed: 6
   attackDistance: 2
   battleLastDuration: 0
   minRetreatDistance: 0

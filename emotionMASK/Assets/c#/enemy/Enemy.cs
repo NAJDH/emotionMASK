@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour,IDamageable
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour,IDamageable
     [Header("基本属性")]
     public float currentHealth;
     public float maxHealth;
+    public float damageValue;
 
 
     [Header("移动参数")]
@@ -63,6 +65,7 @@ public class Enemy : MonoBehaviour,IDamageable
     [SerializeField] private Transform playerCheckPoint;
     [SerializeField] private float playerCheckDistance;
     [SerializeField] private LayerMask whatIsPlayer;
+    [SerializeField] private float attackAreaRadius;
 
     [Header("交战相关")]
     public float battleMoveSpeed;
@@ -70,6 +73,7 @@ public class Enemy : MonoBehaviour,IDamageable
     public float battleLastDuration;
     public float minRetreatDistance;
     public Vector2 retreatVelocity;
+    private bool isDead;
 
 
     //states
@@ -218,11 +222,33 @@ public class Enemy : MonoBehaviour,IDamageable
     //}
     #endregion
 
-
-    public void TakeDamage(float amount, MaskType attackerMask)
+    //伤害相关
+    public virtual void TakeDamage(float amount, MaskType attackerMask)
     {
-        Debug.Log($"Enemy took {amount} damage.");
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
+
+        if(!isDead)
+        {
+            Debug.Log($"Enemy took {amount} damage from {attackerMask}!!!");
+            currentHealth -= amount;
+        }
     }
+    public virtual void Damage(float amount)
+    {
+        Collider2D[] players = Physics2D.OverlapCircleAll(playerCheckPoint.position, attackAreaRadius);
+    }
+
+    private void Die()
+    {
+        isDead = true;
+    }
+
+
+
     #region 翻转函数
     public void Flip()
     {
