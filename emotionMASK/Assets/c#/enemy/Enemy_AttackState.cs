@@ -8,6 +8,12 @@ public class Enemy_AttackState : EnemyState
     {
     }
 
+    public override void Enter()
+    {
+        enemybase.SetZeroVelocity();
+        base.Enter();
+    }
+
     public override void Update()
     {
         base.Update();

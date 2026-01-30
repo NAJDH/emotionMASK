@@ -38,10 +38,7 @@ public class Enemy_BattleState : EnemyState
 
 
         if (WithinTheAttackDistance() && enemybase.PlayerDetected())
-        {
-            enemybase.SetZeroVelocity();
             stateMachine.ChangeState(enemybase.attackState);
-        }
         else
         {
             enemybase.SetVelocity(enemybase.battleMoveSpeed * FacingDirectionToPlayer(), enemybase.rb.velocity.y);
@@ -49,6 +46,10 @@ public class Enemy_BattleState : EnemyState
         }
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     
     private bool WithinTheAttackDistance()
