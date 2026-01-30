@@ -294,16 +294,39 @@ public class Enemy : MonoBehaviour,IDamageable
 
     public RaycastHit2D PlayerDetected()  //检测视线内的玩家
     {
-        RaycastHit2D hit = Physics2D.Raycast(playerCheckPoint.position, Vector3.right * EntityDirection, playerCheckDistance, 
+        // 我们先用一个掩码把 玩家 和 障碍（墙） 一起检测，以便墙可以阻挡视线
+        RaycastHit2D hit = Physics2D.Raycast(playerCheckPoint.position, Vector3.right * EntityDirection, playerCheckDistance,
             whatIsPlayer | wallLayer);
 
-        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+        // 没有任何命中
+        if (hit.collider == null)
         {
             Debug.Log("Can't find anyone!!");
             return default;
         }
 
-        return hit;
+        // 如果命中的是玩家层，且该对象是激活的，则返回命中结果
+        int hitLayer = hit.collider.gameObject.layer;
+        int playerLayer = LayerMask.NameToLayer("Player");
+        //int wallLayerIndex = -1;
+        // 获取 wallLayer 索引（如果需要判断）
+        // 注意：上面 raycast mask 已包含 wallLayer，所以若命中为墙则认为被挡住
+        if (hitLayer == playerLayer)
+        {
+            if (!hit.collider.gameObject.activeInHierarchy)
+            {
+                // 已被禁用的玩家对象，不视为命中
+                return default;
+            }
+
+            return hit;
+        }
+        else
+        {
+            // 如果命中的是墙或其他东西，则视为被挡住
+            Debug.Log("Player view blocked by wall or other: " + hit.collider.name);
+            return default;
+        }
     }
 
     private void OnDrawGizmos()

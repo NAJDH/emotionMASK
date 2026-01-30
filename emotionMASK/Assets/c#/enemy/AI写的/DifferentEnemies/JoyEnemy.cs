@@ -7,7 +7,7 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
     [SerializeField] private float healAmount = 5f;
     [SerializeField] private float healRadius = 3f;
     [SerializeField] private float healInterval = 3f;
-    [SerializeField] private ParticleSystem healEffect;
+    //[SerializeField] private ParticleSystem healEffect;
 
     private float lastHealTime;
     private Color originalColor;
@@ -61,10 +61,10 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
             }
         }
 
-        if (healedAny && healEffect != null)
-        {
-            healEffect.Play();
-        }
+        //if (healedAny && healEffect != null)
+        //{
+        //    healEffect.Play();
+        //}
     }
 
     public void OnFormAbilityTrigger()
@@ -72,11 +72,11 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
         // 喜形态特殊能力：鼓舞光环
         Debug.Log($"{EnemyTypeName} 释放鼓舞光环！");
 
-        if (healEffect != null)
-        {
-            healEffect.transform.localScale = Vector3.one * healRadius * 2;
-            healEffect.Play();
-        }
+        //if (healEffect != null)
+        //{
+        //    healEffect.transform.localScale = Vector3.one * healRadius * 2;
+        //    healEffect.Play();
+        //}
     }
 
     // 重写 TakeDamage，喜形态对哀形态有抗性

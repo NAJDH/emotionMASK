@@ -8,10 +8,11 @@ public class Enemy_GroundedState : EnemyState
     {
     }
 
-    public override void Enter()
-    {
-        base.Enter();
 
+    public override void Update()
+    {
+        base.Update();
+        
         if (enemybase.PlayerDetected())
             stateMachine.ChangeState(enemybase.battleState);
     }
