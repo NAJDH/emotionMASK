@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class player : MonoBehaviour, IDamageable
 {
+    [Header("组件引用")]
+    private PlayerHitboxManager hitboxManager; // 🟢 新增：只需要这一个引用
     public AnimEvent animEvent;
     [Header("地面检测")]
     public Transform groundCheck;
@@ -26,6 +28,7 @@ public class player : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        hitboxManager = GetComponent<PlayerHitboxManager>(); // 获取攻击判定框管理器组件
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         animEvent = GetComponentInChildren<AnimEvent>();
