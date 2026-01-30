@@ -11,13 +11,11 @@ public class AnimEvent : MonoBehaviour
 
     public void TriggerAnimationEvent()
     {
-        Debug.Log("动画结束播放");
         AnimationTriggered = true;
     }
 
     public void ResetAnimationEvent()
     {
-        Debug.Log("动画正在播放");
         AnimationTriggered = false;
     }
 
@@ -25,7 +23,7 @@ public class AnimEvent : MonoBehaviour
     public void EnableHitbox()
     {
         hitTriggered = true;
-        
+        Debug.Log("碰撞框开启");
     }
     
 
@@ -33,6 +31,7 @@ public class AnimEvent : MonoBehaviour
     public void DisableHitbox()
     {
         hitTriggered = false;
+        Debug.Log("碰撞框关闭");
     }
     public void TriggerTransformComplete()
 {

@@ -54,13 +54,14 @@ public class playerNormalATK : playerState
         // 通过动画事件控制判定开关
         if (player.animEvent.hitTriggered && normalATKHitbox != null)
         {
+            Debug.Log("普通攻击判定开启");
             normalATKHitbox.enabled = true;
         }
         else if (normalATKHitbox != null)
         {
+            Debug.Log("普通攻击判定关闭");
             normalATKHitbox.enabled = false;
         }
-        Debug.Log("普通攻击状态更新");
         // 攻击结束后返回待机状态
         if (player.animEvent.AnimationTriggered)
         {
