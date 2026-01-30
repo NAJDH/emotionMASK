@@ -2876,7 +2876,7 @@ GameObject:
   - component: {fileID: 1042878145}
   - component: {fileID: 1042878144}
   m_Layer: 7
-  m_Name: enemy
+  m_Name: enemyXI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2923,8 +2923,8 @@ SpriteRenderer:
   m_SortingLayerID: 339013953
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 72d285325a5a0144e9192177c0b941a2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2943,9 +2943,9 @@ Transform:
   m_GameObject: {fileID: 1042878139}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.78, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -8.1, y: -1.62, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1329500579}
   - {fileID: 1156976715}
@@ -2984,18 +2984,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.22905445, y: -1.4955857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 8.02, y: 6.88}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.6021366, y: 3.9911714}
   m_EdgeRadius: 0
 --- !u!50 &1042878143
 Rigidbody2D:
@@ -3040,13 +3040,13 @@ MonoBehaviour:
   maxHealth: 0
   damageValue: 0
   moveSpeed: 4
-  idleTime: 0
+  idleTime: 2
   moveAnimSpeedMultiplier: 1
   groundCheckPoint: {fileID: 1329500579}
   groundCheckDistance: 0.5
   isGrounded: 0
   wallCheckPoint: {fileID: 1156976715}
-  wallCheckDistance: 0.8
+  wallCheckDistance: 1.2
   isTouchingTheWall: 0
   groundLayer:
     serializedVersion: 2
@@ -3062,7 +3062,7 @@ MonoBehaviour:
   attackAreaRadius: 0
   battleMoveSpeed: 6
   attackDistance: 2
-  battleLastDuration: 0
+  battleLastDuration: 5
   minRetreatDistance: 0
   retreatVelocity: {x: 0, y: 0}
 --- !u!95 &1042878145
@@ -3294,7 +3294,7 @@ Transform:
   m_GameObject: {fileID: 1156976714}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3677,7 +3677,7 @@ Transform:
   m_GameObject: {fileID: 1329500578}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -0.38, z: 0}
+  m_LocalPosition: {x: 4.57, y: -2.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

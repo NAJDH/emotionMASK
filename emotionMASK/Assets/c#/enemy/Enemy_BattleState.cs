@@ -14,10 +14,9 @@ public class Enemy_BattleState : EnemyState
     {
         base.Enter();
 
-        if (player != null)
-        {
+        if (player == null)
             player = enemybase.PlayerDetected().transform;
-        }
+        
 
         if(ShouldRetreat())
         {
@@ -41,14 +40,17 @@ public class Enemy_BattleState : EnemyState
         if (WithinTheAttackDistance() && enemybase.PlayerDetected())
             stateMachine.ChangeState(enemybase.attackState);
         else
+        {
             enemybase.SetVelocity(enemybase.battleMoveSpeed * FacingDirectionToPlayer(), enemybase.rb.velocity.y);
+            enemybase.FilpController(FacingDirectionToPlayer());
+        }
     }
 
 
     
     private bool WithinTheAttackDistance()
     {
-        return DistanceToPlayer() < enemybase.attackDistance;
+        return DistanceToPlayer() <= enemybase.attackDistance;
     }
 
     private float DistanceToPlayer()

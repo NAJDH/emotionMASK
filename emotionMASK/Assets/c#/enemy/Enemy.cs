@@ -75,6 +75,11 @@ public class Enemy : MonoBehaviour,IDamageable
     public Vector2 retreatVelocity;
     private bool isDead;
 
+    [Header("检测目标")]
+    [SerializeField] private Transform targetCheck;
+    [SerializeField] private float targetCheckRadius;
+    [SerializeField] private LayerMask whatIsTarget;
+
 
     //states
     public Enemy_IdleState idleState { get; private set;}
@@ -298,13 +303,18 @@ public class Enemy : MonoBehaviour,IDamageable
             whatIsPlayer | wallLayer);
 
         if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            Debug.Log("Can't find anyone!!");
             return default;
+        }
 
         return hit;
     }
 
     private void OnDrawGizmos()
     {
+       // Gizmos.DrawSphere
+
         Gizmos.DrawLine(groundCheckPoint.position, groundCheckPoint.position + new Vector3(0, -groundCheckDistance));
         Gizmos.DrawLine(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance * EntityDirection, 0, 0));
        
