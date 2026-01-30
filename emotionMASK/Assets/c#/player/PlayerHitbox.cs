@@ -19,7 +19,6 @@ public class PlayerHitbox : MonoBehaviour
     {
         // 每次攻击框开启（激活）时，清空受击名单
         _hitList.Clear();
-        Debug.Log($"🟢 攻击框已激活：{gameObject.name}");
         
         // 检查组件
         Collider2D col = GetComponent<Collider2D>();
@@ -33,53 +32,26 @@ public class PlayerHitbox : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // 实时显示攻击框是否激活
-        Debug.Log($"⏰ 攻击框 {gameObject.name} 正在运行，激活状态：{gameObject.activeSelf}");
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // 1. 检查是否触发了物理碰撞
-    Debug.Log($"攻击框碰到了: {collision.name}, Tag是: {collision.tag}");
+    {   
+        IDamageable target = collision.GetComponent<IDamageable>();
 
-    if(collision.CompareTag("Enemy"))
-    {
-        // 2. 检查是否找到了受伤接口
-        var damageable = collision .GetComponent<IDamageable>(); // 或者 GetComponentInParent
-        if (damageable != null)
+        // 2. 只有当目标有效，且不在“已打中名单”里时
+        if (target != null && !_hitList.Contains(target))
         {
-            Debug.Log("找到 IDamageable，尝试造成伤害");
-            damageable.TakeDamage(10f); // 传递伤害值和当前形态
+            //加入白名单，保证同一个攻击框只打中一次
+            _hitList.Add(target);
+
+            // 3. 【核心】直接告诉玩家：“我打中这个家伙了，剩下的你看着办！”
+            if (_ownerPlayer != null)
+            {
+                _ownerPlayer.OnAttackHit(target, collision);
+            }
         }
         else
         {
-            Debug.LogError("碰到了 Enemy，但它身上没有 IDamageable (比如 Enemy 脚本)！");
+            Debug.Log("❌ 没有找到 IDamageable 接口或已在列表中"); // ← 添加这行
         }
-    }
-        // Debug.Log($"🎯 攻击框触碰到：{collision.gameObject.name}"); // ← 添加这行
-        
-        // IDamageable target = collision.GetComponent<IDamageable>();
-
-        // // 2. 只有当目标有效，且不在“已打中名单”里时
-        // if (target != null && !_hitList.Contains(target))
-        // {
-        //     //加入白名单，保证同一个攻击框只打中一次
-        //     Debug.Log("✅ 找到 IDamageable 接口！"); // ← 添加这行
-        //     _hitList.Add(target);
-
-        //     // 3. 【核心】直接告诉玩家：“我打中这个家伙了，剩下的你看着办！”
-        //     if (_ownerPlayer != null)
-        //     {
-        //         Debug.Log("✅ 通知玩家攻击命中！"); // ← 添加这行
-        //         _ownerPlayer.OnAttackHit(target, collision);
-        //     }
-        // }
-        // else
-        // {
-        //     Debug.Log("❌ 没有找到 IDamageable 接口或已在列表中"); // ← 添加这行
-        // }
     }
 }
 
