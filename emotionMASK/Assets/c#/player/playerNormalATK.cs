@@ -19,7 +19,6 @@ public class playerNormalATK : playerState
     {
         base.Enter();
         stateTimer = 0.3f;
-        HitStopManager.Instance.TriggerHitStop(2.0f, 0.2f, "PlayerAttackHit", false);
 
         //播放音效（还没写）
         //攻击框（Collider2D）在动画事件里控制开关
@@ -76,11 +75,11 @@ public class playerNormalATK : playerState
         // 计算伤害（可以调用 playerStateManager 的伤害计算）
         float finalDamage = playerStateManager.playerCalculateDamage(10);
         
-        // 获取当前形态作为攻击者的面具类型
-        MaskType currentMask = (MaskType)(PlayerFormManager.playerForm.currentFormIndex - 1);
-        
         // 调用敌人的受伤接口（传入2个参数）
         target.TakeDamage(finalDamage);
+
+        // 触发击中停顿效果
+        HitStopManager.Instance.TriggerHitStop(2.0f, 0.2f, "PlayerAttackHit", false);
         
         // 播放音效
         // if (hitSound != null)
