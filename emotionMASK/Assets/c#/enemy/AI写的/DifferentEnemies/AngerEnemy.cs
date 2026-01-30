@@ -87,15 +87,9 @@ public class AngerEnemy : Enemy, IFixedFormEnemy
     }
 
     // ��дTakeDamage��ŭ��̬��ϲ��̬�ж����˺�
-    public new void TakeDamage(float amount, MaskType attackerMask)
+    public new void TakeDamage(float amount)
     {
-        // ������ƹ�ϵ
-        if (attackerMask == MaskType.Joy && isRaging)
-        {
-            // ��ŭʱ��ϲ��̬���������ⷴӦ
-            // ���ܻᴥ������������Ч��
-        }
 
-        base.TakeDamage(amount, attackerMask);
+        base.TakeDamage(amount);
     }
 }

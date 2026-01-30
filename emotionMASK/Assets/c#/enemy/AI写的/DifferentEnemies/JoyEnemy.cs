@@ -1,9 +1,9 @@
-// JoyEnemy.cs - Ï²ÐÎÌ¬µÐÈË
+// JoyEnemy.cs - Ï²ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
 using UnityEngine;
 
 public class JoyEnemy : Enemy, IFixedFormEnemy
 {
-    [Header("Ï²ÐÎÌ¬ÌØÓÐÊôÐÔ")]
+    [Header("Ï²ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float healAmount = 5f;
     [SerializeField] private float healRadius = 3f;
     [SerializeField] private float healInterval = 3f;
@@ -13,17 +13,17 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
     private Color originalColor;
 
     public MaskType FixedForm => MaskType.Joy;
-    public string EnemyTypeName => "Ï²Ö®ÑýÁé";
+    public string EnemyTypeName => "Ï²Ö®ï¿½ï¿½ï¿½ï¿½";
 
     protected override void Awake()
     {
         base.Awake();
 
-        // Ï²ÐÎÌ¬ÌØÓÐµÄ³õÊ¼»¯
+        // Ï²ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ÐµÄ³ï¿½Ê¼ï¿½ï¿½
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.color;
-            spriteRenderer.color = new Color(1f, 0.95f, 0.8f); // Ç³½ðÉ«
+            spriteRenderer.color = new Color(1f, 0.95f, 0.8f); // Ç³ï¿½ï¿½É«
         }
     }
 
@@ -37,7 +37,7 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
     {
         base.Update();
 
-        // ¶¨Ê±ÖÎÁÆÖÜÎ§µÐÈË
+        // ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½
         if (Time.time > lastHealTime + healInterval)
         {
             TryHealNearbyEnemies();
@@ -45,7 +45,7 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
         }
     }
 
-    //¿ÉÑ¡µÄÌØÊâÐ§¹û
+    //ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
     private void TryHealNearbyEnemies()
     {
         Collider2D[] nearby = Physics2D.OverlapCircleAll(transform.position, healRadius);
@@ -56,7 +56,7 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
             Enemy otherEnemy = col.GetComponent<Enemy>();
             if (otherEnemy != null && otherEnemy != this)
             {
-                // ÕâÀïÐèÒªÌí¼ÓÖÎÁÆÂß¼­£¬Äã¿ÉÒÔ¸ù¾Ý×Ô¼ºµÄÏµÍ³ÊµÏÖ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ÏµÍ³Êµï¿½ï¿½
                 healedAny = true;
             }
         }
@@ -69,8 +69,8 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
 
     public void OnFormAbilityTrigger()
     {
-        // Ï²ÐÎÌ¬ÌØÊâÄÜÁ¦£º¹ÄÎè¹â»·
-        Debug.Log($"{EnemyTypeName} ÊÍ·Å¹ÄÎè¹â»·£¡");
+        // Ï²ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â»·
+        Debug.Log($"{EnemyTypeName} ï¿½Í·Å¹ï¿½ï¿½ï¿½â»·ï¿½ï¿½");
 
         //if (healEffect != null)
         //{
@@ -79,15 +79,9 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
         //}
     }
 
-    // ÖØÐ´ TakeDamage£¬Ï²ÐÎÌ¬¶Ô°§ÐÎÌ¬ÓÐ¿¹ÐÔ
-    public new void TakeDamage(float amount, MaskType attackerMask)
+    // ï¿½ï¿½Ð´ TakeDamageï¿½ï¿½Ï²ï¿½ï¿½Ì¬ï¿½Ô°ï¿½ï¿½ï¿½Ì¬ï¿½Ð¿ï¿½ï¿½ï¿½
+    public new void TakeDamage(float amount)
     {
-        // ¼ÆËã¿ËÖÆ¹ØÏµ
-        if (attackerMask == MaskType.Sorrow)
-        {
-            amount *= 0.7f; // ¶Ô°§ÐÎÌ¬¹¥»÷ÓÐ30%¼õÉË
-        }
-
-        base.TakeDamage(amount, attackerMask);
+        base.TakeDamage(amount);
     }
 }

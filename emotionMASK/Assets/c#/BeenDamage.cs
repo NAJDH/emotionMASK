@@ -15,7 +15,7 @@ public enum MaskType
 public interface IDamageable
 {
     // 现在的 MaskType 已经定义在上面了，所以这里不会报错了
-    void TakeDamage(float amount, MaskType attackerMask);
+    void TakeDamage(float amount);
 }
 
 // 3. (可选) 如果你不需要挂载这个脚本到物体上，连下面这个类都可以删掉

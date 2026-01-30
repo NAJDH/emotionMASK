@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class SorrowEnemy : Enemy, IFixedFormEnemy
 {
-    [Header("°§ĞÎÌ¬ÌØÓĞÊôĞÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float slowFieldRadius = 4f;
-    [SerializeField] private float slowEffect = 0.6f; // ¼õËÙµ½60%ËÙ¶È
+    [SerializeField] private float slowEffect = 0.6f; // ï¿½ï¿½ï¿½Ùµï¿½60%ï¿½Ù¶ï¿½
     [SerializeField] private GameObject slowFieldPrefab;
     [SerializeField] private float summonInterval = 8f;
 
@@ -13,19 +13,19 @@ public class SorrowEnemy : Enemy, IFixedFormEnemy
     private GameObject activeSlowField;
 
     public MaskType FixedForm => MaskType.Sorrow;
-    public string EnemyTypeName => "°§Ö®ÓÄ»ê";
+    public string EnemyTypeName => "ï¿½ï¿½Ö®ï¿½Ä»ï¿½";
 
     protected override void Awake()
     {
         base.Awake();
 
-        // °§ĞÎÌ¬Íâ¹Û
+        // ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = new Color(0.7f, 0.8f, 1f); // À¶É«µ÷
+            spriteRenderer.color = new Color(0.7f, 0.8f, 1f); // ï¿½ï¿½É«ï¿½ï¿½
         }
 
-        // ´´½¨¼õËÙÁìÓò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (slowFieldPrefab != null)
         {
             activeSlowField = Instantiate(slowFieldPrefab, transform);
@@ -43,7 +43,7 @@ public class SorrowEnemy : Enemy, IFixedFormEnemy
     {
         base.Update();
 
-        // ¶¨Ê±ÕÙ»½
+        // ï¿½ï¿½Ê±ï¿½Ù»ï¿½
         if (Time.time > lastSummonTime + summonInterval)
         {
             TrySummonMinion();
@@ -53,17 +53,17 @@ public class SorrowEnemy : Enemy, IFixedFormEnemy
 
     private void TrySummonMinion()
     {
-        // ÕâÀï¿ÉÒÔ¸ù¾İĞèÒªÊµÏÖÕÙ»½Ğ¡¹ÖµÄÂß¼­
-        Debug.Log($"{EnemyTypeName} ³¢ÊÔÕÙ»½ÆÍ´Ó...");
-        // ±ÈÈç£ºInstantiate(minionPrefab, transform.position + Random.insideUnitSphere, Quaternion.identity);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÊµï¿½ï¿½ï¿½Ù»ï¿½Ğ¡ï¿½Öµï¿½ï¿½ß¼ï¿½
+        Debug.Log($"{EnemyTypeName} ï¿½ï¿½ï¿½ï¿½ï¿½Ù»ï¿½ï¿½Í´ï¿½...");
+        // ï¿½ï¿½ï¿½ç£ºInstantiate(minionPrefab, transform.position + Random.insideUnitSphere, Quaternion.identity);
     }
 
     public void OnFormAbilityTrigger()
     {
-        // °§ĞÎÌ¬ÌØÊâÄÜÁ¦£º°§ÉËÁìÓò
-        Debug.Log($"{EnemyTypeName} Õ¹¿ª°§ÉËÁìÓò£¡");
+        // ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Debug.Log($"{EnemyTypeName} Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
-        // À©´ó¼õËÙÁìÓò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (activeSlowField != null)
         {
             StartCoroutine(ExpandSlowField());
@@ -85,7 +85,7 @@ public class SorrowEnemy : Enemy, IFixedFormEnemy
             yield return null;
         }
 
-        // »Ö¸´Ô­´óĞ¡
+        // ï¿½Ö¸ï¿½Ô­ï¿½ï¿½Ğ¡
         yield return new WaitForSeconds(3f);
 
         timer = 0f;
@@ -98,10 +98,10 @@ public class SorrowEnemy : Enemy, IFixedFormEnemy
         }
     }
 
-    // ¼õËÙĞ§¹ûÓ¦ÓÃ£¨¿ÉÒÔÅäºÏÆäËû½Å±¾Ê¹ÓÃ£©
+    // ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½Ó¦ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å±ï¿½Ê¹ï¿½Ã£ï¿½
     public void ApplySlowEffect(Collider2D other)
     {
-        // ¶Ô½øÈëÁìÓòµÄÍæ¼Ò»òÓÑ¾üÊ©¼Ó¼õËÙ
-        // ĞèÒªÅäºÏÆäËûÏµÍ³ÊµÏÖ
+        // ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ñ¾ï¿½Ê©ï¿½Ó¼ï¿½ï¿½ï¿½
+        // ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³Êµï¿½ï¿½
     }
 }

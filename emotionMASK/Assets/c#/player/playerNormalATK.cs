@@ -80,7 +80,7 @@ public class playerNormalATK : playerState
         MaskType currentMask = (MaskType)(PlayerFormManager.playerForm.currentFormIndex - 1);
         
         // 调用敌人的受伤接口（传入2个参数）
-        target.TakeDamage(finalDamage, currentMask);
+        target.TakeDamage(finalDamage);
         
         // 播放音效
         // if (hitSound != null)

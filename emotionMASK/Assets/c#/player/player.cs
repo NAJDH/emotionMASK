@@ -62,7 +62,7 @@ public class player : MonoBehaviour, IDamageable
         Debug.Log($"当前状态：{stateMachine.currentState}");
         playerStateManager.Update(); // 更新形态管理器
     }
-    public void TakeDamage(float amount, MaskType attackerMask)
+    public void TakeDamage(float amount)
     {
         Debug.Log($"Player took {amount} damage.");
     }

@@ -1,9 +1,9 @@
-// FearEnemy.cs - ¾åÐÎÌ¬µÐÈË
+// FearEnemy.cs - ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
 using UnityEngine;
 
 public class FearEnemy : Enemy, IFixedFormEnemy
 {
-    [Header("¾åÐÎÌ¬ÌØÓÐÊôÐÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float fearRadius = 3f;
     [SerializeField] private float invisibilityDuration = 4f;
     [SerializeField] private float invisibilityCooldown = 10f;
@@ -14,16 +14,16 @@ public class FearEnemy : Enemy, IFixedFormEnemy
     private float lastInvisibilityTime;
 
     public MaskType FixedForm => MaskType.Fear;
-    public string EnemyTypeName => "¾åÖ®ÃÎ÷Ê";
+    public string EnemyTypeName => "ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½";
 
     protected override void Awake()
     {
         base.Awake();
 
-        // ¾åÐÎÌ¬Íâ¹Û
+        // ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = new Color(0.8f, 0.6f, 1f); // ×ÏÉ«µ÷
+            spriteRenderer.color = new Color(0.8f, 0.6f, 1f); // ï¿½ï¿½É«ï¿½ï¿½
         }
     }
 
@@ -31,19 +31,19 @@ public class FearEnemy : Enemy, IFixedFormEnemy
     {
         base.Update();
 
-        // ÒþÉíÀäÈ´¼ì²é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½
         if (!isInvisible && Time.time > lastInvisibilityTime + invisibilityCooldown)
         {
             TryBecomeInvisible();
         }
 
-        // ¿Ö¾å¹â»·Ð§¹û
+        // ï¿½Ö¾ï¿½â»·Ð§ï¿½ï¿½
         ApplyFearAura();
     }
 
     private void TryBecomeInvisible()
     {
-        // ÔÚ°²È«Çé¿öÏÂ²ÅÒþÉí
+        // ï¿½Ú°ï¿½È«ï¿½ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!IsPlayerTooClose())
         {
             StartCoroutine(BecomeInvisible());
@@ -55,11 +55,11 @@ public class FearEnemy : Enemy, IFixedFormEnemy
         isInvisible = true;
         lastInvisibilityTime = Time.time;
 
-        // ÒþÉíÌØÐ§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
         if (invisibilityEffect != null)
             invisibilityEffect.Play();
 
-        // ½µµÍÍ¸Ã÷¶È
+        // ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½
         if (spriteRenderer != null)
         {
             Color c = spriteRenderer.color;
@@ -67,12 +67,12 @@ public class FearEnemy : Enemy, IFixedFormEnemy
             spriteRenderer.color = c;
         }
 
-        // ¿ÉÄÜ»á¸Ä±älayerÈÃÍæ¼ÒÎÞ·¨Ëø¶¨
+        // ï¿½ï¿½ï¿½Ü»ï¿½Ä±ï¿½layerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½
         // gameObject.layer = LayerMask.NameToLayer("InvisibleEnemy");
 
         yield return new WaitForSeconds(invisibilityDuration);
 
-        // »Ö¸´¿É¼û
+        // ï¿½Ö¸ï¿½ï¿½É¼ï¿½
         if (spriteRenderer != null)
         {
             Color c = spriteRenderer.color;
@@ -87,7 +87,7 @@ public class FearEnemy : Enemy, IFixedFormEnemy
 
     private bool IsPlayerTooClose()
     {
-        // ¼ì²âÍæ¼ÒÊÇ·ñÔÚ¸½½ü
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½
         Collider2D player = Physics2D.OverlapCircle(transform.position, fearRadius, LayerMask.GetMask("Player"));
         return player != null;
     }
@@ -100,8 +100,8 @@ public class FearEnemy : Enemy, IFixedFormEnemy
 
         foreach (var player in players)
         {
-            // ¶ÔÍæ¼ÒÊ©¼Ó¿Ö¾åÐ§¹û
-            // ÕâÀï¿ÉÒÔ´¥·¢Íæ¼ÒµÄ¿Ö¾å×´Ì¬£¨ÐèÒªÄãÔÚplayer½Å±¾ÖÐÊµÏÖ£©
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ê©ï¿½Ó¿Ö¾ï¿½Ð§ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ¿Ö¾ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½playerï¿½Å±ï¿½ï¿½ï¿½Êµï¿½Ö£ï¿½
             if (fearEffect != null && !fearEffect.isPlaying)
             {
                 fearEffect.transform.position = player.transform.position;
@@ -112,10 +112,10 @@ public class FearEnemy : Enemy, IFixedFormEnemy
 
     public void OnFormAbilityTrigger()
     {
-        // ¾åÐÎÌ¬ÌØÊâÄÜÁ¦£º¿Ö¾å¼âÐ¥
-        Debug.Log($"{EnemyTypeName} ·¢³ö¿Ö¾å¼âÐ¥£¡");
+        // ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½Ð¥
+        Debug.Log($"{EnemyTypeName} ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½Ð¥ï¿½ï¿½");
 
-        // ´ò¶ÏÒþÉí£¨Èç¹ûÕýÔÚÒþÉí£©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isInvisible)
         {
             StopAllCoroutines();
@@ -128,7 +128,7 @@ public class FearEnemy : Enemy, IFixedFormEnemy
             isInvisible = false;
         }
 
-        // À©´ó¿Ö¾åÐ§¹û
+        // ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½Ð§ï¿½ï¿½
         StartCoroutine(FearScream());
     }
 
@@ -148,14 +148,14 @@ public class FearEnemy : Enemy, IFixedFormEnemy
         fearRadius = originalRadius;
     }
 
-    // ÖØÐ´TakeDamage£¬ÒþÉíÊ±¼õÉË
-    public new void TakeDamage(float amount, MaskType attackerMask)
+    // ï¿½ï¿½Ð´TakeDamageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+    public new void TakeDamage(float amount)
     {
         if (isInvisible)
         {
-            amount *= 0.5f; // ÒþÉíÊ±¼õÉË50%
+            amount *= 0.5f; // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½50%
 
-            // ÊÜµ½¹¥»÷¿ÉÄÜ´òÆÆÒþÉí
+            // ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Random.value > 0.5f)
             {
                 StopAllCoroutines();
@@ -169,6 +169,6 @@ public class FearEnemy : Enemy, IFixedFormEnemy
             }
         }
 
-        base.TakeDamage(amount, attackerMask);
+        base.TakeDamage(amount);
     }
 }
