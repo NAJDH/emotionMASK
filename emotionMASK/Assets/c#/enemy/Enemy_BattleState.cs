@@ -38,7 +38,7 @@ public class Enemy_BattleState : EnemyState
             stateMachine.ChangeState(enemybase.idleState);
 
 
-        if (WithinTheAttackDistance() || enemybase.PlayerDetected())
+        if (WithinTheAttackDistance() && enemybase.PlayerDetected())
             stateMachine.ChangeState(enemybase.attackState);
         else
             enemybase.SetVelocity(enemybase.battleMoveSpeed * FacingDirectionToPlayer(), enemybase.rb.velocity.y);
