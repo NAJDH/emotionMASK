@@ -20,6 +20,8 @@ public class player : MonoBehaviour, IDamageable
     public playerAirState airState{get; private set;}
     public playerNormalATK normalATKState{get; private set;}
     public playerTransformState transformState{get; private set;} // 新增形态切换状态
+    public playerDieState dieState{get; private set;}
+    public playerBeenATKState beenATKState{get; private set;}
 
 
     private void Awake()
@@ -34,6 +36,8 @@ public class player : MonoBehaviour, IDamageable
         airState  = new playerAirState (this, stateMachine, "jump");
         normalATKState = new playerNormalATK(this, stateMachine, "normalATK");
         transformState = new playerTransformState(this, stateMachine, "transform"); // 初始化形态切换状态
+        dieState = new playerDieState(this, stateMachine, "die");
+        beenATKState = new playerBeenATKState(this, stateMachine, "beATK");
         // 单例模式
         // if(Instance == null)
         //     Instance = this;
