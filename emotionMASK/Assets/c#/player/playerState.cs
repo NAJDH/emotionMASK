@@ -42,4 +42,9 @@ public class playerState
         player.anim.SetBool(animBoolName, false);
     }
     #endregion
+
+    public virtual void OnAttackHit(IDamageable target, Collider2D hitInfo)
+{
+    // 默认什么都不做，留给子类去重写
+}
 }

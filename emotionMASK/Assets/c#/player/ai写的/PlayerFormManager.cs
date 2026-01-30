@@ -71,8 +71,6 @@ public class PlayerFormManager : MonoBehaviour
                 form.SetActive(false);
             }
         }
-        
-        Debug.Log("所有形态初始化完成");
     }
     
     private void Update()

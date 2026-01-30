@@ -40,8 +40,8 @@ public class PlayerHitboxManager : MonoBehaviour
         if (hitboxDict.TryGetValue(name, out PlayerHitbox hitbox))
         {
             hitbox.gameObject.SetActive(true);
-            // 这里很重要：每次开启时，重置它的命中状态，确保能再次造成伤害
-            hitbox.hasHitEnemy = false; 
+            // // 这里很重要：每次开启时，重置它的命中状态，确保能再次造成伤害
+            // hitbox.hasHitEnemy = false; 
         }
         else
         {

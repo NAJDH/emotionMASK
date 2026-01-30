@@ -82,6 +82,16 @@ public class player : MonoBehaviour, IDamageable
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
+
+
+    // 在 player.cs 中添加这个公共方法
+public void OnAttackHit(IDamageable target, Collider2D hitInfo)
+{
+    // 把消息转发给当前状态
+    // 这样，如果当前是“普攻状态”，就会触发普攻的逻辑
+    //用作伤害计算和特效播放
+    stateMachine.currentState.OnAttackHit(target, hitInfo);
+}
     public void FilpController(float x)
     {
         if(x > 0 && !isFacingRight) Flip();

@@ -31,7 +31,6 @@ public static class playerStateManager
 
     public static void Update()
     {
-        Debug.Log("正常状态更新中");
         if(PlayerFormManager.playerForm.currentFormIndex == 1)
         {
             XI = true;

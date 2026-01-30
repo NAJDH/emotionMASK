@@ -229,6 +229,7 @@ public class Enemy : MonoBehaviour,IDamageable
     //受击相关
     public virtual void TakeDamage(float damage, MaskType attackerMask)
     {
+        Debug.Log("打到敌人了！！！！！！！！！！！！！！！！！！！！！！！！！！");
         if (isDead)
             return;
         
