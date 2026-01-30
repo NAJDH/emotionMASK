@@ -80,7 +80,7 @@ public class JoyEnemy : Enemy, IFixedFormEnemy
     }
 
     // ��д TakeDamage��ϲ��̬�԰���̬�п���
-    public new void TakeDamage(float amount)
+    public override void TakeDamage(float amount, MaskType attackerMask)
     {
         base.TakeDamage(amount);
     }

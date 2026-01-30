@@ -72,7 +72,7 @@ public class Enemy_BattleState : EnemyState
             }
             else
             {
-                enemybase.Flip();
+                //enemybase.Flip();
 
                 // 没有有效目标则停止移动
                 enemybase.SetZeroVelocity();
