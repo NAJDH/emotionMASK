@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
     private void Awake()
     {
         transition = GetComponent<Animator>();
-        childTran = this.GetComponentInChildren<Animator>();
+        childTran = GetComponentInChildren<Animator>();
     }
 
     private void Update()
