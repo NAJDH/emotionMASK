@@ -31,6 +31,11 @@ public class AnimEvent : MonoBehaviour
     {
         hitTriggered = false;
     }
+    public void StopBeHit()
+    {
+        playerStateManager.isBeingHitting = false;
+        playerStateManager.isBeHit = false; // 受击动画结束时一起清
+    }
     public void TriggerTransformComplete()
 {
     // player playerScript = GetComponentInParent<player>();

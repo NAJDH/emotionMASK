@@ -12,18 +12,17 @@ public class playerBeenATKState : playerState
     public override void Enter()
     {
         base.Enter();
-        // player.SetVelocity(0f, 0f);
+        player.SetVelocity(0f, 0f);
     }
     public override void Update()
     {
         base.Update();
-        
-        // // 检测是否离开地面
-        // if(!player.IsGroundDetected())
-        // {
-        //     stateMachine.ChangeState(player.airState);
-        //     return;
-        // }
+        // 不要在这里重置 isBeHit，否则受击状态立即退出
+        if(playerStateManager.isBeHit == false)
+        {
+            stateMachine.ChangeState(player.idleState);
+            return;
+        }
     }
     public override void Exit()
     {

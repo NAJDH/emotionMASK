@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Enemy_BattleState : EnemyState
 {
-    public Transform player; // ×î½üÒ»´ÎÒÑÖªµÄÍæ¼Ò Transform£¨ÓĞĞ§ÇÒ»îÔ¾µÄĞÎÌ¬»ò×îºóÒ»´ÎÃüÖĞµÄĞÎÌ¬£©
+    public Transform player;
     private float lastTimeInBattle;
 
     public Enemy_BattleState(Enemy enemybase, EnemyStateMachine stateMachine, string animBoolName) : base(enemybase, stateMachine, animBoolName)
@@ -14,7 +14,6 @@ public class Enemy_BattleState : EnemyState
     {
         base.Enter();
 
-        // ³¢ÊÔ»ñÈ¡µ±Ç°¿É¼ûµÄÍæ¼ÒÄ¿±ê£¨Èç¹ûÉäÏßÄÜÃüÖĞ£©
         var hit = enemybase.PlayerDetected();
         if (hit.collider != null)
             player = hit.transform;
@@ -26,44 +25,30 @@ public class Enemy_BattleState : EnemyState
             enemybase.rb.velocity = new Vector2(enemybase.retreatVelocity.x * FacingDirectionToPlayer(), enemybase.retreatVelocity.y);
             enemybase.FilpController(FacingDirectionToPlayer());
         }
-
     }
 
     public override void Update()
     {
         base.Update();
 
-        // Ã¿Ö¡³¢ÊÔÓÃÉäÏß¼ì²â¸üĞÂÍæ¼Ò£¨ÓÅÏÈÊ¹ÓÃµ±Ç°¿É¼ûµÄĞÎÌ¬£©
         var hit = enemybase.PlayerDetected();
         if (hit.collider != null)
         {
-            // Èç¹ûÉäÏßÃüÖĞÒ»¸öÍæ¼ÒĞÎÌ¬£¬Á¢¼´¸üĞÂÎª¸Ã Transform£¬²¢Ë¢ĞÂÕ½¶·¼ÆÊ±
             player = hit.transform;
             UpdateLastBattleTime();
         }
         else
         {
-            // Î´ÃüÖĞÊ±²»ÒªÃ¤Ä¿Çå¿Õ player£º
-            // - Èç¹û player ÒıÓÃ´æÔÚÇÒ¶ÔÓ¦µÄ GameObject ÈÔ´¦ÓÚ active£¬Ôò±£Áô£¨ÕâÑùµ±Íæ¼ÒÈÆµ½±³ºóÈÔ»á×ªÉí×·»÷£©
-            // - Ö»ÓĞµ± player ±»½ûÓÃ»òÏú»ÙÊ±²ÅÇå¿ÕÒıÓÃ£¨ÀıÈçÍæ¼Ò¾ÉĞÎÌ¬±» SetActive(false)£©
-            if (player != null)
-            {
-                if (!player.gameObject.activeInHierarchy)
-                {
-                    player = null;
-                }
-                // ·ñÔò±£Áô player£¨¼´Ê¹µ±Ç°ÉäÏßÃ»ÃüÖĞ£¬Ò²¿É»ùÓÚ last-known ¼ÌĞø×·»÷/×ªÉí£©
-            }
-        }
-
-        if (BattleTimeOut())
+            // ç«‹åˆ»è¿›å…¥ idleï¼Œåœ 5 ç§’
+            enemybase.idleState.SetCustomIdleTime(5f);
             stateMachine.ChangeState(enemybase.idleState);
+            return;
+        }
 
         if (WithinTheAttackDistance() && player != null)
             stateMachine.ChangeState(enemybase.attackState);
         else
         {
-            // »ùÓÚ player£¨×î½üÒ»´ÎÒÑÖªÎ»ÖÃ£©ÒÆ¶¯ºÍ³¯Ïò
             int dir = FacingDirectionToPlayer();
             if (dir != 0)
             {
@@ -72,15 +57,11 @@ public class Enemy_BattleState : EnemyState
             }
             else
             {
-                //enemybase.Flip();
-
-                // Ã»ÓĞÓĞĞ§Ä¿±êÔòÍ£Ö¹ÒÆ¶¯
                 enemybase.SetZeroVelocity();
             }
         }
     }
 
-    
     private bool WithinTheAttackDistance()
     {
         return DistanceToPlayer() <= enemybase.attackDistance;
@@ -96,7 +77,7 @@ public class Enemy_BattleState : EnemyState
 
     private int FacingDirectionToPlayer()
     {
-        // Èç¹ûÃ»ÓĞÒÑÖª player£¬·µ»Ø 0£¨²»ÒÆ¶¯£©
+        // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Öª playerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
         if (player == null)
             return 0;
 

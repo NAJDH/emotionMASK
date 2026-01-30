@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour, IDamageable
+public class player : MonoBehaviour
 {
     [Header("组件引用")]
     private PlayerHitboxManager hitboxManager; // 🟢 新增：只需要这一个引用
@@ -61,12 +61,46 @@ public class player : MonoBehaviour, IDamageable
         stateMachine.currentState.Update();
         Debug.Log($"当前状态：{stateMachine.currentState}");
         playerStateManager.Update(); // 更新形态管理器
-    }
-    public void TakeDamage(float amount)
-    {
-        Debug.Log($"Player took {amount} damage.");
+        if(playerStateManager.isDead && stateMachine.currentState != dieState)
+        {
+            stateMachine.ChangeState(dieState);
+        }
+        if (playerStateManager.isBeHit)
+        {
+            if(playerStateManager.playerHP > 0 && stateMachine.currentState != beenATKState)
+            {
+                stateMachine.ChangeState(beenATKState);
+            }
+            else if(playerStateManager.playerHP <= 0 && stateMachine.currentState != dieState)
+            {
+                stateMachine.ChangeState(dieState);
+            }   
+        }
     }
 
+    #region 受伤接口(已注释)
+    // //.................................................................................接口
+    // //玩家受伤
+    // public void TakeDamage(float amount)
+    // {
+    //     // 这里的代码就是我们之前讨论的：
+    //     // 1. 扣血
+    //     // 2. 判断死亡
+    //     // 3. 播放动画
+        
+    //     playerStateManager.playerHP -= amount;
+
+    //     if (playerStateManager.isDead)
+    //     {
+    //         stateMachine.ChangeState(dieState);
+    //     }
+    //     else
+    //     {
+    //         stateMachine.ChangeState(beenATKState);
+    //     }
+    //     Debug.Log($"Player took {amount} damage.");
+    // }
+    #endregion
 
     public void SetVelocity(float xVelocity, float yVelocity)
     {

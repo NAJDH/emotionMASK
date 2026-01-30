@@ -10,6 +10,10 @@ public static class playerStateManager
     public static bool NU;
     public static bool AI;
     public static bool JU;
+    public static bool isDead = false;
+    public static bool isBeHit = false;                 //这个用来标识玩家是否受击,会在执行受击动画的刚开始被重置
+    public static bool isBeingHitting = false;          //这个用来标识玩家是否正在受击，会在受击动画的最后用动画事件重置
+    [Header("玩家基础属性")]
     public static float playerHP = 100f;               //这个是厌恶值，我写成了血量而已
     public static float maxPlayerHP = 100f;
     public static float baseDamage = 10f;              //基础伤害
@@ -47,7 +51,6 @@ public static class playerStateManager
         {
             JU = true;
         }
-        Debug.Log("当前形态：" + PlayerFormManager.playerForm.currentFormIndex);
     }
     
     public static float playerCalculateDamage(float baseDamage)
@@ -62,13 +65,20 @@ public static class playerStateManager
             return baseDamage;
         }
     }
-    public static void enemyCalculateDamage(float basedamage)
+    public static void enemyHitPlayerDamage(float basedamage)
     {
+
+        if (!isBeingHitting)
+        {
+            isBeingHitting = true;
+            isBeHit = true;
         playerHP -= basedamage;
         if (playerHP < 0)
         {
             playerHP = 0;
+            isDead = true;
         }
         Debug.Log("玩家受到 " + basedamage + " 点伤害，当前血量：" + playerHP);
+        }
     }
 }
