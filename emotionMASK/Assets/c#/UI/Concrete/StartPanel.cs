@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -32,6 +33,7 @@ public class StartPanel : BasePanel
             //按钮点击事件
             Debug.Log("The game-start-button was clicked!");
             //GameRoot.Instance.sceneSystem.SetScene(new MainScene());
+            SceneManager.LoadScene(1);
         });
-    }
+    } 
 }

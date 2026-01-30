@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4147439306208655516}
-  - component: {fileID: 5910611014575491430}
+  - component: {fileID: 411218151353938948}
   m_Layer: 0
   m_Name: SceneSwitch
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5910611014575491430
+--- !u!114 &411218151353938948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 477185049996675859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7f4206563925a45992b3361a79072d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1691534b611858b4ba5c009e2834f17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transition: {fileID: 0}
+  transitionTime: 1
