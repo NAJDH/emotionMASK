@@ -21,7 +21,7 @@ public class playerNormalATK : playerState
         stateTimer = 0.3f;
 
         //播放音效（还没写）
-        //攻击框（Collider2D）在动画事件里控制开关
+        AudioManager.PlayAudio("attack");
         hitboxManager = player.GetComponent<PlayerHitboxManager>(); // 获取管理器引用
     }
 
@@ -34,6 +34,7 @@ public class playerNormalATK : playerState
         player.SetVelocity(0f, player.rb.velocity.y);
             
         }
+
         // if(playerStateManager.XI)
         // {
         //     player.anim.SetInteger("whoATK", 1);

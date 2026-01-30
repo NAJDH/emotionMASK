@@ -58,6 +58,7 @@ public static class playerStateManager
         bool isCritical = Random.value < critRate;
         if (isCritical)
         {
+            HitStopManager.Instance.TriggerHitStop(2.0f, 0.15f, "baoji", false);
             return baseDamage * critDamageMultiplier;
         }
         else

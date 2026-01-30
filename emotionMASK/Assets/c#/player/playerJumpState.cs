@@ -12,6 +12,7 @@ public class playerJumpState : playerState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.PlayAudio("jump");
         player.rb.velocity = new Vector2(player.rb.velocity.x, playerStateManager.jumpForce); //设置跳跃速度
     }
     public override void Update()

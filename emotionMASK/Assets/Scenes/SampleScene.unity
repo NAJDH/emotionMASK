@@ -4104,7 +4104,27 @@ MonoBehaviour:
     volume: 1
     PlayerOnAwake: 1
     loop: 1
+  - clip: {fileID: 8300000, guid: 3ce8a84e81074f108b8221b10086c087, type: 3}
+    outputGroup: {fileID: 3615002605678062678, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
+    volume: 1
+    PlayerOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 0911421406011cc4ba0cc9c1f9f3345b, type: 3}
+    outputGroup: {fileID: 3615002605678062678, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
+    volume: 1
+    PlayerOnAwake: 0
+    loop: 0
   - clip: {fileID: 8300000, guid: 585410ea211ad334385d532c73b234c8, type: 3}
+    outputGroup: {fileID: 3615002605678062678, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
+    volume: 1
+    PlayerOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: ffe9f10eb2359e94f8c8fa90c35cc2d1, type: 3}
+    outputGroup: {fileID: 3615002605678062678, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
+    volume: 1
+    PlayerOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: a8864009e57b4734fb675859fa48e454, type: 3}
     outputGroup: {fileID: 3615002605678062678, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
     volume: 1
     PlayerOnAwake: 0
@@ -5884,7 +5904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1789766149
 Transform:
   m_ObjectHideFlags: 0
