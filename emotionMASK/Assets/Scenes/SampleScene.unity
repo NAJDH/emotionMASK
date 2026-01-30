@@ -1405,21 +1405,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &322817149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322817144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb860ee9c26880f488bdd832f8a9f165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitboxes:
-  - hitboxName: 
-    hitboxScript: {fileID: 0}
 --- !u!1 &361691797
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,6 +3011,7 @@ Transform:
   - {fileID: 1329500579}
   - {fileID: 1156976715}
   - {fileID: 1165896324}
+  - {fileID: 330435880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1042878142
@@ -3060,7 +3046,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.22905445, y: -1.4955857}
+  m_Offset: {x: 0.12477207, y: -1.4955857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3071,7 +3057,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.6021366, y: 3.9911714}
+  m_Size: {x: 7.393572, y: 3.9911714}
   m_EdgeRadius: 0
 --- !u!50 &1042878143
 Rigidbody2D:
@@ -3135,17 +3121,11 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  attackAreaRadius: 0
   battleMoveSpeed: 6
-  attackDistance: 2
+  attackDistance: 1.1
   battleLastDuration: 5
   minRetreatDistance: 0
   retreatVelocity: {x: 0, y: 0}
-  targetCheck: {fileID: 0}
-  targetCheckRadius: 0
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!95 &1042878145
 Animator:
   serializedVersion: 5
