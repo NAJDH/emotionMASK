@@ -230,6 +230,7 @@ public class Enemy : MonoBehaviour,IDamageable
     public virtual void TakeDamage(float damage)
     {
         Debug.Log("打到敌人了！！！！！！！！！！！！！！！！！！！！！！！！！！");
+        
         if (isDead)
             return;
         

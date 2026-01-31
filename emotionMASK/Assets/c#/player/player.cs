@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
+    public GameObject playerProjectilePrefab; // 玩家投射物预制体引用
     [Header("组件引用")]
     private PlayerHitboxManager hitboxManager; // 🟢 新增：只需要这一个引用
     public AnimEvent animEvent;
@@ -24,6 +25,7 @@ public class player : MonoBehaviour
     public playerTransformState transformState{get; private set;} // 新增形态切换状态
     public playerDieState dieState{get; private set;}
     public playerBeenATKState beenATKState{get; private set;}
+    public playerNormalATK2 normalATK2{get; private set;}
 
 
     private void Awake()
@@ -41,7 +43,7 @@ public class player : MonoBehaviour
         transformState = new playerTransformState(this, stateMachine, "transform"); // 初始化形态切换状态
         dieState = new playerDieState(this, stateMachine, "die");
         beenATKState = new playerBeenATKState(this, stateMachine, "beATK");
-        // 单例模式
+        normalATK2 = new playerNormalATK2(this, stateMachine, "normalATK2");
         // if(Instance == null)
         //     Instance = this;
         // else
@@ -108,7 +110,7 @@ public class player : MonoBehaviour
         FilpController(xVelocity);
     }
     #region 翻转角色相关参数和函数
-    private bool isFacingRight = false;
+    public bool isFacingRight = false;
     private int playerDirection = -1;
     public void Flip()
     {

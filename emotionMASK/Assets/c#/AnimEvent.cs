@@ -7,7 +7,8 @@ public class AnimEvent : MonoBehaviour
     [Header("命中的触发器")]
     public bool hitTriggered = false;
 
-    public bool AnimationTriggered { get; private set; }
+    public bool AnimationTriggered{get;  private set;}
+    public bool AnimationTriggered2 = false;
 
     public void TriggerAnimationEvent()
     {
@@ -17,6 +18,15 @@ public class AnimEvent : MonoBehaviour
     public void ResetAnimationEvent()
     {
         AnimationTriggered = false;
+    }
+    public void Trigger2AnimationEvent()
+    {
+        AnimationTriggered2 = true;
+    }
+
+    public void Reset2AnimationEvent()
+    {
+        AnimationTriggered2 = false;
     }
 
     // 在动画关键帧调用：开启判定

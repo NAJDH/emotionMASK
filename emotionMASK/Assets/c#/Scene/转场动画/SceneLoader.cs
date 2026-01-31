@@ -7,19 +7,19 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public Animator transition;
-    public Animator childTran;
+    //public Animator childTran;
 
     public float transitionTime = 1f;
 
     private void Awake()
     {
         transition = GetComponent<Animator>();
-        childTran = GetComponentInChildren<Animator>();
+        //childTran = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Space))
             LoadNextScene();
     }
 
@@ -30,7 +30,7 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadSceneCO(int sceneIndex)
     {
-        childTran.SetTrigger("Start");
+        //childTran.SetTrigger("Start");
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);

@@ -36,10 +36,10 @@ public class playerIdleState : playerState
         {
             stateMachine.ChangeState(player.normalATKState);
         }
-        // if (Input.GetKeyDown(KeyCode.Q))
-        // {
-        //     stateMachine.ChangeState(player.counterATKState);
-        // }   
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            stateMachine.ChangeState(player.normalATK2);
+        }  
     }
     public override void Exit()
     {

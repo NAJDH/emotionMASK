@@ -18,9 +18,9 @@ public class playerNormalATK : playerState
     public override void Enter()
     {
         base.Enter();
-        stateTimer = 0.3f;
+        stateTimer = 0.2f;
 
-        //播放音效（还没写）
+        //播放音效
         AudioManager.PlayAudio("attack");
         hitboxManager = player.GetComponent<PlayerHitboxManager>(); // 获取管理器引用
     }
@@ -34,23 +34,8 @@ public class playerNormalATK : playerState
         player.SetVelocity(0f, player.rb.velocity.y);
             
         }
-
-        // if(playerStateManager.XI)
-        // {
-        //     player.anim.SetInteger("whoATK", 1);
-        // }
-        // else if(playerStateManager.NU)
-        // {
-        //     player.anim.SetInteger("whoATK", 2);
-        // }
-        // else if(playerStateManager.AI)
-        // {
-        //     player.anim.SetInteger("whoATK", 3);
-        // }
-        // else if(playerStateManager.JU)
-        // {
-        //     player.anim.SetInteger("whoATK", 4);
-        // }
+        if(playerStateManager.XI)
+        {
         // 🟢 使用 PlayerHitboxManager 来控制判定开关
         if (player.animEvent.hitTriggered && hitboxManager != null)
         {
@@ -62,6 +47,20 @@ public class playerNormalATK : playerState
             Debug.Log("普通攻击判定关闭");
             hitboxManager.DisableHitbox(normalATKHitboxName); // ← 使用管理器关闭
         }
+            
+        }
+        else if(playerStateManager.NU)
+        {
+            
+        }
+        else if(playerStateManager.AI)
+        {
+            
+        }
+        else if(playerStateManager.JU)
+        {
+            
+        }
         // 攻击结束后返回待机状态
         if (player.animEvent.AnimationTriggered)
         {
@@ -71,8 +70,8 @@ public class playerNormalATK : playerState
     // 🟢 关键：重写这个方法来处理命中逻辑
     public override void OnAttackHit(IDamageable target, Collider2D hitInfo)
     {
-        Debug.Log("🔥 普通攻击命中敌人！！！！！！！！！！！");
-        
+        if(playerStateManager.XI)
+        {
         // 计算伤害（可以调用 playerStateManager 的伤害计算）
         float finalDamage = playerStateManager.playerCalculateDamage(10);
         
@@ -80,16 +79,21 @@ public class playerNormalATK : playerState
         target.TakeDamage(finalDamage);
 
         // 触发击中停顿效果
-        HitStopManager.Instance.TriggerHitStop(2.0f, 0.2f, "PlayerAttackHit", false);
-        
-        // 播放音效
-        // if (hitSound != null)
-        // {
-        //     AudioManager.Instance.Play(hitSound);
-        // }
-        
-        // 生成特效（如果需要）
-        // Instantiate(hitEffectPrefab, hitInfo.ClosestPoint(player.transform.position), Quaternion.identity);
+        HitStopManager.Instance.TriggerHitStop(1.5f, 0.15f, "PlayerAttackHit", false);
+            
+        }
+        else if(playerStateManager.NU)
+        {
+            
+        }
+        else if(playerStateManager.AI)
+        {
+            
+        }
+        else if(playerStateManager.JU)
+        {
+            
+        }
     }
 
     public override void Exit()
