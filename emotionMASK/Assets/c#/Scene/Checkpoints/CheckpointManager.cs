@@ -4,28 +4,28 @@ using UnityEngine.SceneManagement;
 
 public static class CheckpointManager
 {
-    // ³¡¾°Ãû ¡ª ¸ù¾İÄãµÄÏîÄ¿Êµ¼Ê³¡¾°ÃûĞŞ¸Ä
+    // å…¥å£/æµç¨‹ç”¨åˆ°çš„åœºæ™¯åï¼ˆè¯·æŒ‰é¡¹ç›®å®é™…åœºæ™¯åä¿®æ”¹ï¼‰
     public static string StartScene = "StartScene";
     public static string FixedIntroScene = "IFeelUncomfortable";
     public static string DialogueScene = "say";
     public static string BattleScene = "SampleScene";
 
-
-    // µ±Ç°Ëæ»ú¶Ô»°Ë÷Òı£¨0..7£©
+    // å½“å‰å¯¹è¯çš„ç´¢å¼•ï¼ˆ0..7ï¼‰ï¼Œç”± ChooseNextDialogue() éšæœºå†³å®š
     public static int CurrentDialogueIndex { get; private set; } = 0;
 
-    // internal runner
+    // éšè—çš„ Runnerï¼Œç”¨æ¥åœ¨é™æ€ç±»é‡Œå¯åŠ¨åç¨‹
     private static CheckpointRunner runner;
 
-    // Á÷³Ì×´Ì¬±êÖ¾£¨ÓÉ³¡¾°ÄÚ½Å±¾»Øµ÷ÉèÖÃ£©
-    private static bool fixedIntroCompleted;
-    private static bool dialogueCompleted;
-    private static bool battleAnimationCompleted;
-    private static bool lastBattleResultVictory;
+    // å…³å¡æµç¨‹çŠ¶æ€æ ‡è®°ï¼ˆç”±å¯¹åº”åœºæ™¯çš„è„šæœ¬å›è°ƒé€šçŸ¥ï¼‰
+    private static bool fixedIntroCompleted;       // å›ºå®šåºåˆ—/å¼€åœºæ˜¯å¦å®Œæˆ
+    private static bool dialogueCompleted;         // å¯¹è¯æ˜¯å¦å®Œæˆ
+    private static bool battleAnimationCompleted;  // æˆ˜æ–—ç»“ç®—åŠ¨ç”»æ˜¯å¦å®Œæˆ
+    private static bool lastBattleResultVictory;   // ä¸Šä¸€æ¬¡æˆ˜æ–—æ˜¯å¦èƒœåˆ©
 
+    // æ€»æµç¨‹æ˜¯å¦åœ¨è¿è¡Œï¼ˆé˜²æ­¢é‡å¤å¯åŠ¨ï¼‰
     private static bool running;
 
-    // ³õÊ¼»¯ runner£¨µ¥Àı¡¢³£×¤£©
+    // ç¡®ä¿åç¨‹ Runner å­˜åœ¨ä¸”å¸¸é©»ï¼ˆDontDestroyOnLoadï¼‰
     private static void EnsureRunner()
     {
         if (runner != null) return;
@@ -35,48 +35,53 @@ public static class CheckpointManager
         runner.hideFlags = HideFlags.HideInHierarchy;
     }
 
-    // Íâ²¿Èë¿Ú£º´Ó¿ªÊ¼½çÃæµã»÷¿ªÊ¼Ê±µ÷ÓÃ
+    // å¤–éƒ¨å…¥å£ï¼šä»å¼€å§‹æŒ‰é’®/å¼€åœºè§¦å‘æ•´ä¸ªæµç¨‹
     public static void StartRun()
     {
         if (running) return;
         EnsureRunner();
         running = true;
+
+        // é‡ç½®æµç¨‹çŠ¶æ€
         fixedIntroCompleted = false;
         dialogueCompleted = false;
         battleAnimationCompleted = false;
+
+        // å¯åŠ¨æµç¨‹ä¸»åç¨‹
         runner.StartCoroutine(RunCoroutine());
     }
 
-    // Ëæ»úÑ¡ÔñÏÂÒ»¸ö¶Ô»°
+    // éšæœºé€‰æ‹©ä¸‹ä¸€æ®µå¯¹è¯ç´¢å¼•ï¼ˆ0..7ï¼‰
     private static void ChooseNextDialogue()
     {
-        CurrentDialogueIndex = Random.Range(0, 8); // 0..7 ¹²8¸ö¶Ô»°
+        CurrentDialogueIndex = Random.Range(0, 8); // 0..7 å…± 8 æ®µå¯¹è¯
     }
 
-    // ³¡¾°»Øµ÷£º¹Ì¶¨¹ı³¡¶¯»­³¡¾°ÔÚ¶¯»­Íê³ÉÊ±µ÷ÓÃ
+    // å›ºå®šå¼€åœºå®Œæˆé€šçŸ¥ï¼ˆç”±åœºæ™¯è„šæœ¬è°ƒç”¨ï¼‰
     public static void NotifyFixedIntroComplete()
     {
         fixedIntroCompleted = true;
     }
 
-    // ³¡¾°»Øµ÷£º¶Ô»°³¡¾°Íê³É£¨ÀıÈçÍæ¼Òµã»÷¼ÌĞø£©Ê±µ÷ÓÃ
+    // å¯¹è¯å®Œæˆé€šçŸ¥ï¼ˆç”±å¯¹è¯ UI/è„šæœ¬è°ƒç”¨ï¼‰
     public static void NotifyDialogueComplete()
     {
         dialogueCompleted = true;
     }
 
-    // ³¡¾°»Øµ÷£ºÕ½¶·¶¯»­²¥·Å½áÊøÊ±µ÷ÓÃ£¨Ê¤Àû»òÊ§°Ü¶¯»­¶¼µ÷ÓÃ£¬²¢´«Èë½á¹û£©
+    // æˆ˜æ–—ç»“ç®—åŠ¨ç”»å®Œæˆé€šçŸ¥ï¼ˆèƒœ/è´Ÿç”±å‚æ•°ä¼ å…¥ï¼‰
     public static void NotifyBattleAnimationComplete(bool victory)
     {
         lastBattleResultVictory = victory;
         battleAnimationCompleted = true;
     }
 
-    // Õ½¶·³¡¾°ÔÚÕ½¶·½áÊøºóµ÷ÓÃ±¾·½·¨£¬CheckpointManager »áµ÷ÓÃ³¡¾°ÄÚµÄ BattleSceneController ²¥·Å½á¹û¶¯»­
+    // æˆ˜æ–—ç»“æœä¸ŠæŠ¥ï¼šç”±æˆ˜æ–—åœºæ™¯è§¦å‘
     public static void ReportBattleResult(bool victory)
     {
         lastBattleResultVictory = victory;
-        // ÕÒµ½³¡¾°ÄÚµÄ BattleSceneController£¨Èô´æÔÚ£©²¢ÈÃËü²¥·Å¶ÔÓ¦¶¯»­
+
+        // ä¼˜å…ˆè®© BattleSceneController æ’­æ”¾èƒœ/è´Ÿç»“ç®—åŠ¨ç”»
         var controller = Object.FindObjectOfType<BattleSceneController>();
         if (controller != null)
         {
@@ -84,59 +89,58 @@ public static class CheckpointManager
             return;
         }
 
-        // Èç¹ûÃ»ÓĞ controller Ö±½ÓÍ¨Öª£¨±£Ö¤Á÷³Ì²»»á¿¨×¡£©
+        // å¦‚æœæ‰¾ä¸åˆ°æ§åˆ¶å™¨ï¼Œç›´æ¥æ ‡è®°å®Œæˆï¼Œé¿å…æµç¨‹å¡ä½
         battleAnimationCompleted = true;
     }
 
-    // Ö÷Á÷³ÌĞ­³Ì£¨ÓÉ runner Æô¶¯£©
+    // ä¸»æµç¨‹åç¨‹ï¼šå¼€åœº -> å¯¹è¯ -> æˆ˜æ–— -> ç»“ç®— -> ç»§ç»­/ç»“æŸ
     private static IEnumerator RunCoroutine()
     {
-        // 1) ¼ÓÔØ¹Ì¶¨¹ı³¡³¡¾°
+        // 1) åŠ è½½å›ºå®šå¼€åœºåœºæ™¯
         yield return runner.StartCoroutine(LoadSceneCO(FixedIntroScene));
 
-        // µÈ´ı¹ı³¡³¡¾°Í¨¹ı NotifyFixedIntroComplete Í¨ÖªÍê³É£¨¿É¿¼ÂÇ³¬Ê±£©
+        // ç­‰å¾…å›ºå®šå¼€åœºå®Œæˆï¼ˆå¸¦è¶…æ—¶ï¼Œé¿å…å¡æ­»ï¼‰
         fixedIntroCompleted = false;
         float fixedTimeout = 10f;
         float t0 = Time.time;
         while (!fixedIntroCompleted && Time.time - t0 < fixedTimeout)
             yield return null;
 
-        // 2) Ê×´Î½øÈë¶Ô»°£¨»òÑ­»·ÖĞÃ¿´Î¶¼ÖØĞÂÑ¡Ôñ£©
+        // 2) å¾ªç¯ï¼šå¯¹è¯ -> æˆ˜æ–—
         while (running)
         {
+            // é€‰æ‹©ä¸‹ä¸€æ®µå¯¹è¯
             ChooseNextDialogue();
 
-            // ¼ÓÔØ¶Ô»°³¡¾°
+            // åŠ è½½å¯¹è¯åœºæ™¯
             yield return runner.StartCoroutine(LoadSceneCO(DialogueScene));
 
-            // µÈ´ı¶Ô»°³¡¾°Í¨ÖªÍê³É
+            // ç­‰å¾…å¯¹è¯å®Œæˆï¼ˆå¸¦è¶…æ—¶ï¼‰
             dialogueCompleted = false;
             float dialogueTimeout = 60f;
             t0 = Time.time;
             while (!dialogueCompleted && Time.time - t0 < dialogueTimeout)
                 yield return null;
 
-            // ¼ÓÔØÕ½¶·³¡¾°
+            // åŠ è½½æˆ˜æ–—åœºæ™¯
             yield return runner.StartCoroutine(LoadSceneCO(BattleScene));
 
-            // ÔÚÕ½¶·³¡¾°ÖĞ£¬BattleSceneController »áÔÚÕ½¶·½áÊøÊ±µ÷ÓÃ ReportBattleResult
-            // È»ºóÓÉ BattleSceneController ²¥·ÅÊ¤/°Ü¶¯»­£¬²¢ÔÚ¶¯»­½áÊøÊ±µ÷ÓÃ NotifyBattleAnimationComplete
+            // ç­‰å¾…æˆ˜æ–—ç»“ç®—åŠ¨ç”»å®Œæˆï¼ˆå¸¦è¶…æ—¶ï¼‰
             battleAnimationCompleted = false;
             float battleTimeout = 120f;
             t0 = Time.time;
             while (!battleAnimationCompleted && Time.time - t0 < battleTimeout)
                 yield return null;
 
-            // ¸ù¾İÉÏÒ»´Î½á¹ûÌø×ª£º
+            // æ ¹æ®èƒœè´Ÿå†³å®šæ˜¯å¦ç»§ç»­
             if (lastBattleResultVictory)
             {
-                // Ê¤Àû£ºÖØĞÂ·ÖÅäËæ»ú¶Ô»°²¢¼ÌĞøÑ­»·£¨¼ÓÔØ¶Ô»°³¡¾°£©
-                // loop will choose next dialogue automatically
+                // èƒœåˆ©ï¼šå›åˆ°ä¸‹ä¸€è½®å¯¹è¯
                 continue;
             }
             else
             {
-                // Ê§°Ü£º·µ»Ø¿ªÊ¼½çÃæ²¢½áÊøÁ÷³Ì
+                // å¤±è´¥ï¼šå›åˆ°å¼€å§‹åœºæ™¯å¹¶ç»“æŸæµç¨‹
                 yield return runner.StartCoroutine(LoadSceneCO(StartScene));
                 running = false;
                 yield break;
@@ -144,7 +148,7 @@ public static class CheckpointManager
         }
     }
 
-    // ³¡¾°¼ÓÔØ¸¨Öú
+    // å¼‚æ­¥åŠ è½½åœºæ™¯ï¼ˆç­‰å¾…åŠ è½½å®Œæˆï¼‰
     private static IEnumerator LoadSceneCO(string sceneName)
     {
         var op = SceneManager.LoadSceneAsync(sceneName);
@@ -154,6 +158,6 @@ public static class CheckpointManager
             yield return null;
     }
 
-    // ÄÚ²¿ MonoBehaviour ÓÃÓÚÆô¶¯Ğ­³Ì
+    // å†…éƒ¨ MonoBehaviourï¼šä»…ç”¨äºå¯åŠ¨åç¨‹
     private class CheckpointRunner : MonoBehaviour { }
 }

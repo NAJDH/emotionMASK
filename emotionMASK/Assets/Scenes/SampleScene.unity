@@ -4075,9 +4075,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: 98c4ec2fb2743a04694d23c05ff91e4a, type: 3}
+  - clip: {fileID: 8300000, guid: 9f683aea508815d4ab4ab872df611a08, type: 3}
     outputGroup: {fileID: -2297542478821290841, guid: 5b058a272646c5c47b5fc7e495987160, type: 2}
-    volume: 1
+    volume: 0.71
     PlayerOnAwake: 1
     loop: 1
   - clip: {fileID: 8300000, guid: 3ce8a84e81074f108b8221b10086c087, type: 3}

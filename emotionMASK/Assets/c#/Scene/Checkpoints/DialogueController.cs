@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class DialogueController : MonoBehaviour
 {
-    // ÓÃÓÚÑİÊ¾£ºÄã¿ÉÒÔÔÚ Inspector ÖĞÉèÖÃ UI ÔªËØ²¢¸ù¾İ index Õ¹Ê¾ÄÚÈİ
+    // åœºæ™¯å¼€å§‹æ—¶æ‰§è¡Œï¼šè¯»å–å½“å‰å¯¹è¯ç´¢å¼•ï¼Œå¹¶æ ¹æ®ç´¢å¼•å±•ç¤ºå¯¹åº”å†…å®¹ï¼ˆUI/æ–‡æœ¬/éŸ³é¢‘ç­‰ï¼‰
     public void Start()
     {
         int idx = CheckpointManager.CurrentDialogueIndex;
         Debug.Log("DialogueController: show dialogue index " + idx);
-        // TODO: ¸ù¾İ idx ¼ÓÔØ²¢²¥·Å¶ÔÓ¦¶Ô»°ÎÄ±¾/ÒôÆµ
+        // TODO: æ ¹æ® idx åŠ è½½/æ’­æ”¾å¯¹åº”çš„å¯¹è¯æ–‡æœ¬ã€è¯­éŸ³æˆ–åŠ¨ç”»
     }
 
-    // ÔÚ¶Ô»°½áÊø£¨ÀıÈçÍæ¼Òµã»÷¼ÌĞø»ò¶Ô»°²¥·ÅÍê£©Ê±µ÷ÓÃ
+    // å¯¹è¯ç»“æŸæ—¶ç”± UI æˆ–åŠ¨ç”»äº‹ä»¶è°ƒç”¨ï¼šé€šçŸ¥æµç¨‹ç®¡ç†å™¨â€œå¯¹è¯å·²å®Œæˆâ€
     public void OnDialogueFinished()
     {
         CheckpointManager.NotifyDialogueComplete();
