@@ -70,7 +70,11 @@ public class player : MonoBehaviour
 
         stateMachine.currentState.Update();
         Debug.Log($"当前状态：{stateMachine.currentState}");
-        playerStateManager.Update(); // 更新形态管理器
+        
+        // 🟢 确保 PlayerFormManager 已初始化
+        if(PlayerFormManager.playerForm != null)
+            playerStateManager.Update(); // 更新形态管理器
+        
         if(playerStateManager.isDead && stateMachine.currentState != dieState)
         {
             stateMachine.ChangeState(dieState);

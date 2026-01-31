@@ -35,6 +35,9 @@ public static class playerStateManager
 
     public static void Update()
     {
+        // 🟢 空值检查
+        if(PlayerFormManager.playerForm == null) return;
+        
         if(PlayerFormManager.playerForm.currentFormIndex == 1)
         {
             XI = true;
