@@ -10,6 +10,7 @@ public static class CheckpointManager
     public static string DialogueScene = "say";
     public static string BattleScene = "SampleScene";
 
+
     // 当前随机对话索引（0..7）
     public static int CurrentDialogueIndex { get; private set; } = 0;
 
