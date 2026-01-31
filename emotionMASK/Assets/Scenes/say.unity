@@ -1079,8 +1079,88 @@ MonoBehaviour:
       position: 0
       characterSprite: {fileID: 21300000, guid: a62733a4655410c4a9d8598f016f5947, type: 3}
       sentence: Fuck you!!!!
-  - chapterName: 
-    lines: []
+  - chapterName: 111
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '22
+
+'
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '33
+
+'
+  - chapterName: 222
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: this
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: that
+  - chapterName: 333
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: 666
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: 6nm
+  - chapterName: 444
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: fuck
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '33
+
+'
+  - chapterName: 555
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '*****'
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '33
+
+'
+  - chapterName: 666
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: mine
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '33
+
+'
+  - chapterName: 777
+    lines:
+    - characterName: 22
+      position: 0
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: stop
+    - characterName: 33
+      position: 1
+      characterSprite: {fileID: 21300000, guid: e87eb89c581bbaa4692bd2d1997c7514, type: 3}
+      sentence: '33
+
+'
 --- !u!4 &1311464192
 Transform:
   m_ObjectHideFlags: 0
