@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour,IDamageable
     [SerializeField] private float knockbackDuration = .2f;
     private bool isknockback;
     private Coroutine knockbackCoroutine;
+    public GameObject bloodEffect;
 
 
     //states
@@ -246,6 +247,8 @@ public class Enemy : MonoBehaviour,IDamageable
     protected void ReduceHP(float amount)
     {
         currentHealth -= amount;
+
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
 
         if (currentHealth <= 0)
             Die();

@@ -13,6 +13,9 @@ public class player : MonoBehaviour
     // 动画事件脚本（用于动画帧回调）
     public AnimEvent animEvent;
 
+    [Header("粒子")]
+    public GameObject bloodEffect;
+
     [Header("地面检测")]
     // 地面检测的参考点（脚底位置）
     public Transform groundCheck;
@@ -112,6 +115,7 @@ public class player : MonoBehaviour
             if (playerStateManager.playerHP > 0 && stateMachine.currentState != beenATKState)
             {
                 stateMachine.ChangeState(beenATKState);
+                Instantiate(bloodEffect, transform.position, Quaternion.identity);
             }
             else if (playerStateManager.playerHP <= 0 && stateMachine.currentState != dieState)
             {
