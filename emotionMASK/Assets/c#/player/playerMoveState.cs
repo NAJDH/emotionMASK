@@ -18,7 +18,6 @@ public class playerMoveState : playerState
         base.Update();
         Debug.Log("移动状态更新");
         
-        // 检测是否离开地面
         if(!player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.airState);
@@ -30,15 +29,15 @@ public class playerMoveState : playerState
         if(xInput == 0)
             stateMachine.ChangeState(player.idleState);  
 
-        if(Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+        if(player.ConsumeBufferedJump() && player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.jumpState);
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (player.ConsumeBufferedAtk1())
         {
             stateMachine.ChangeState(player.normalATKState);
         }
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if(player.ConsumeBufferedAtk2())
         {
             stateMachine.ChangeState(player.normalATK2);
         }

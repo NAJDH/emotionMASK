@@ -4,60 +4,60 @@ using UnityEngine;
 
 public class BattleSceneController : MonoBehaviour
 {
-    public Animator animator; // ÔÚ Inspector ¹ÒÈë£¬ÓÃÓÚ²¥·Å Victory/Failure ¶¯»­
-    public float outcomeAnimationLength = 2.0f; // ±¸ÓÃ£ºÈç¹ûÃ»ÓĞ¶¯»­ÊÂ¼ş¿ÉÓÃÕâ¸öÊ±³¤
+    public Animator animator; // ï¿½ï¿½ Inspector ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ Victory/Failure ï¿½ï¿½ï¿½ï¿½
+    public float outcomeAnimationLength = 2.0f; // ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
-    [Header("µĞÈËÉú³É")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public GameObject enemyJoyPrefab;
     public GameObject enemyAngerPrefab;
     public GameObject enemySorrowPrefab;
     public GameObject enemyFearPrefab;
 
-    [Tooltip("¿ÉÑ¡£ºÓÃÓÚ·ÅÖÃÉú³Éµã£¬ÓÅÏÈÊ¹ÓÃÕâĞ©µã¡£ÈôÎª¿ÕÔòÔÚÖĞĞÄ¸½½üËæ»úÉú³É")]
+    [Tooltip("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµã£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½Ğ©ï¿½ã¡£ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Transform[] spawnPoints;
 
-    [Tooltip("ÊµÀı»¯µÄµĞÈË½«×÷Îª¸Ã¸¸¶ÔÏóµÄ×Ó¶ÔÏó£¬ÈôÎª¿ÕÔò×Ô¶¯´´½¨")]
+    [Tooltip("Êµï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½Ë½ï¿½ï¿½ï¿½Îªï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Transform enemyParent;
 
-    [Tooltip("Éú³ÉµĞÈËÊıÁ¿·¶Î§£¨°üº¬ min ºÍ max£©")]
+    [Tooltip("ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ min ï¿½ï¿½ maxï¿½ï¿½")]
     public int minEnemies = 4;
     public int maxEnemies = 5;
 
-    [Tooltip("½øÈëÕ½¶·ºó¶³½áÊ±³¤£¨Ãë£¬ÕæÊµÊ±¼ä£¬²»ÊÜ Time.timeScale Ó°Ïì£©")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ó¶³½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ÊµÊ±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ Time.timeScale Ó°ï¿½ì£©")]
     public float freezeDuration = 2f;
 
     private List<GameObject> spawnedEnemies = new List<GameObject>();
 
     private void Start()
     {
-        // Æô¶¯£ºÏÈÉú³ÉµĞÈË²¢¶³½áÁ½Ãë£¬ÔÙÈÃÕ½¶·Õı³£½øĞĞ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(SpawnAndFreezeCoroutine());
     }
 
     private IEnumerator SpawnAndFreezeCoroutine()
     {
-        // È·±£ parent ´æÔÚ
+        // È·ï¿½ï¿½ parent ï¿½ï¿½ï¿½ï¿½
         if (enemyParent == null)
         {
             var go = new GameObject("Enemies");
-            DontDestroyOnLoad(go); // ¿ÉÑ¡£ºÈç¹ûÄãÏë±£Áô¿ç³¡¾°Ôò±£Áô£¬·ñÔò×¢ÊÍµô
+            DontDestroyOnLoad(go); // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë±£ï¿½ï¿½ï¿½ç³¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½Íµï¿½
             enemyParent = go.transform;
         }
 
         SpawnEnemies();
 
-        // Ê±¼ä¶³½á£¨ÕæÊµÊ±¼äµÈ´ı£©
+        // Ê±ï¿½ä¶³ï¿½á£¨ï¿½ï¿½ÊµÊ±ï¿½ï¿½È´ï¿½ï¿½ï¿½
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(freezeDuration);
         Time.timeScale = 1f;
 
-        // ¶³½á½áÊøºó¿ÉÒÔ×ö¶îÍâ³õÊ¼»¯£¨ÀıÈçÆôÓÃ AI¡¢HUD ÌáÊ¾µÈ£©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AIï¿½ï¿½HUD ï¿½ï¿½Ê¾ï¿½È£ï¿½
         yield break;
     }
 
     private void SpawnEnemies()
     {
-        // Ñ¡ÔñÉú³ÉÊıÁ¿£¨°üº¬£©
+        // Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         int count = Random.Range(minEnemies, maxEnemies + 1);
 
         for (int i = 0; i < count; i++)
@@ -66,7 +66,7 @@ public class BattleSceneController : MonoBehaviour
             GameObject prefab = ChooseRandomEnemyPrefab();
             if (prefab == null)
             {
-                Debug.LogWarning("BattleSceneController: Ä³¸öµĞÈËÔ¤ÖÆÌåÎª¿Õ£¬ÇëÔÚ Inspector ÖĞÉèÖÃ¡£");
+                Debug.LogWarning("BattleSceneController: Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ Inspector ï¿½ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½");
                 continue;
             }
 
@@ -77,15 +77,15 @@ public class BattleSceneController : MonoBehaviour
 
     private Vector3 ChooseSpawnPosition(int index, int total)
     {
-        // ÓÅÏÈÊ¹ÓÃÅäÖÃµÄ spawnPoints
+        // ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ spawnPoints
         if (spawnPoints != null && spawnPoints.Length > 0)
         {
-            // Èç¹û spawnPoints ÉÙÓÚÉú³ÉÊıÁ¿£¬Ñ­»·Ê¹ÓÃ»òËæ»ú³éÈ¡
+            // ï¿½ï¿½ï¿½ spawnPoints ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½Ê¹ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡
             int choose = spawnPoints.Length >= total ? index % spawnPoints.Length : Random.Range(0, spawnPoints.Length);
             return spawnPoints[choose].position;
         }
 
-        // ·ñÔòÔÚ³¡¾°ÖĞĞÄ¸½½üËæ»úÉú³ÉÎ»ÖÃ£¨X Öá·ÖÉ¢£¬Y ±£³ÖÓë±¾¶ÔÏóÏàÍ¬£©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½X ï¿½ï¿½ï¿½É¢ï¿½ï¿½Y ï¿½ï¿½ï¿½ï¿½ï¿½ë±¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
         float spread = 3.0f + total * 0.5f;
         float x = transform.position.x + Random.Range(-spread, spread);
         float y = transform.position.y;
@@ -104,38 +104,38 @@ public class BattleSceneController : MonoBehaviour
         }
     }
 
-    // Ô­ÓĞ½Ó¿Ú£ºÓÉ¾ßÌåÕ½¶·Âß¼­ÔÚÕ½¶·½áÊøÊ±µ÷ÓÃ£¨Ê¤Àû»òÊ§°Ü£©
+    // Ô­ï¿½Ğ½Ó¿Ú£ï¿½ï¿½É¾ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½
     public void OnBattleEnded(bool victory)
     {
-        // ¸æËß CheckpointManager Õ½¶·½á¹û£¬Manager »áµ÷ÓÃ±¾ÀàµÄ PlayOutcomeAnimation£¨ÈôÕÒµ½£©
+        // ï¿½ï¿½ï¿½ï¿½ CheckpointManager Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Manager ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ PlayOutcomeAnimationï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
         CheckpointManager.ReportBattleResult(victory);
     }
 
-    // CheckpointManager ¿ÉÄÜ»áÖ±½Óµ÷ÓÃ´Ë·½·¨À´²¥·Å¶ÔÓ¦µÄ¶¯»­
+    // CheckpointManager ï¿½ï¿½ï¿½Ü»ï¿½Ö±ï¿½Óµï¿½ï¿½Ã´Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶ï¿½Ó¦ï¿½Ä¶ï¿½ï¿½ï¿½
     public void PlayOutcomeAnimation(bool victory)
     {
         if (animator != null)
         {
             animator.SetTrigger(victory ? "Victory" : "Failure");
-            // Èç¹ûÄãÓĞ¶¯»­ÊÂ¼ş¿ÉÒÔÖ±½Óµ÷ÓÃ CheckpointManager.NotifyBattleAnimationComplete£¬
-            // ÕâÀïÓÃĞ­³ÌµÈ´ıÒ»¸ö¹Ì¶¨Ê±³¤ÔÙÍ¨Öª£¨±ãÓÚÑİÊ¾£©
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Óµï¿½ï¿½ï¿½ CheckpointManager.NotifyBattleAnimationCompleteï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ­ï¿½ÌµÈ´ï¿½Ò»ï¿½ï¿½ï¿½Ì¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½
             StartCoroutine(WaitAndNotify(victory));
         }
         else
         {
-            // Èç¹ûÃ»ÓĞ animator£¬Ö±½ÓÍ¨Öª£¨±ÜÃâ¿¨×¡£©
+            // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ animatorï¿½ï¿½Ö±ï¿½ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½â¿¨×¡ï¿½ï¿½
             CheckpointManager.NotifyBattleAnimationComplete(victory);
         }
     }
 
     private IEnumerator WaitAndNotify(bool victory)
     {
-        // Ê¹ÓÃÕæÊµÊ±¼äµÈ´ı¶¯»­½áÊø£¨¶¯»­¿ÉÄÜÒÀÀµ Time.timeScale; ÕâÀïÓÃ unscaled£©
+        // Ê¹ï¿½ï¿½ï¿½ï¿½ÊµÊ±ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Time.timeScale; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ unscaledï¿½ï¿½
         yield return new WaitForSecondsRealtime(outcomeAnimationLength);
         CheckpointManager.NotifyBattleAnimationComplete(victory);
     }
 
-    // ¿ÉÑ¡£ºÌá¹©Íâ²¿ÇåÀíº¯Êı£¨µ±ÄãĞèÒªÔÚÕ½¶·½áÊøºóÏú»Ù²ĞÁôµĞÈËÊ±µ÷ÓÃ£©
+    // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½á¹©ï¿½â²¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½
     public void CleanupSpawnedEnemies()
     {
         for (int i = spawnedEnemies.Count - 1; i >= 0; i--)

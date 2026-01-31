@@ -13,6 +13,12 @@ public class player : MonoBehaviour
     public float groundCheckRange = 0.2f;
     public LayerMask groundLayer;
 
+    [Header("输入缓冲")]
+    public float inputBufferTime = 0.15f; // 预输入窗口（秒）
+    private float jumpPressedTime = -999f;
+    private float atk1PressedTime = -999f;
+    private float atk2PressedTime = -999f;
+
     public static player Instance{get; private set;}
     public Animator anim{get; private set;}
     public Rigidbody2D rb{get; private set;}
@@ -60,6 +66,8 @@ public class player : MonoBehaviour
     }
     protected void Update() 
     {
+        CaptureInputBuffer();
+
         stateMachine.currentState.Update();
         Debug.Log($"当前状态：{stateMachine.currentState}");
         playerStateManager.Update(); // 更新形态管理器
@@ -78,6 +86,43 @@ public class player : MonoBehaviour
                 stateMachine.ChangeState(dieState);
             }   
         }
+    }
+
+    private void CaptureInputBuffer()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) jumpPressedTime = Time.time;
+        if (Input.GetKeyDown(KeyCode.Mouse0)) atk1PressedTime = Time.time;
+        if (Input.GetKeyDown(KeyCode.Mouse1)) atk2PressedTime = Time.time;
+    }
+
+    public bool ConsumeBufferedJump()
+    {
+        if (Time.time - jumpPressedTime <= inputBufferTime)
+        {
+            jumpPressedTime = -999f;
+            return true;
+        }
+        return false;
+    }
+
+    public bool ConsumeBufferedAtk1()
+    {
+        if (Time.time - atk1PressedTime <= inputBufferTime)
+        {
+            atk1PressedTime = -999f;
+            return true;
+        }
+        return false;
+    }
+
+    public bool ConsumeBufferedAtk2()
+    {
+        if (Time.time - atk2PressedTime <= inputBufferTime)
+        {
+            atk2PressedTime = -999f;
+            return true;
+        }
+        return false;
     }
 
     #region 受伤接口(已注释)

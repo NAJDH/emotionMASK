@@ -45,6 +45,7 @@ public class PlayerHitbox : MonoBehaviour
             // 3. 【核心】直接告诉玩家：“我打中这个家伙了，剩下的你看着办！”
             if (_ownerPlayer != null)
             {
+                Debug.Log("✅ 找到 IDamageable 接口，通知玩家处理伤害，打中了！！！！！！！！"); // ← 添加这行
                 _ownerPlayer.OnAttackHit(target, collision);
             }
         }
