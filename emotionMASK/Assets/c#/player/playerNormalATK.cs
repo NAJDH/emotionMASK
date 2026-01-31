@@ -20,8 +20,24 @@ public class playerNormalATK : playerState
         base.Enter();
         stateTimer = 0.2f;
 
+        if(playerStateManager.XI)
+        {
         //播放音效
         AudioManager.PlayAudio("attack");
+        
+        }
+        else if(playerStateManager.NU)
+        {
+            
+        }
+        else if(playerStateManager.AI)
+        {
+            
+        }
+        else if(playerStateManager.JU)
+        {
+            
+        }
         hitboxManager = player.GetComponent<PlayerHitboxManager>(); // 获取管理器引用
     }
 
@@ -59,7 +75,17 @@ public class playerNormalATK : playerState
         }
         else if(playerStateManager.JU)
         {
-            
+            // 🟢 使用 PlayerHitboxManager 来控制判定开关
+        if (player.animEvent.hitTriggered && hitboxManager != null)
+        {
+            Debug.Log("普通攻击判定开启");
+            hitboxManager.EnableHitbox(normalATKHitboxName); // ← 使用管理器开启
+        }
+        else if (!player.animEvent.hitTriggered && hitboxManager != null)
+        {
+            Debug.Log("普通攻击判定关闭");
+            hitboxManager.DisableHitbox(normalATKHitboxName); // ← 使用管理器关闭
+        }
         }
         // 攻击结束后返回待机状态
         if (player.animEvent.AnimationTriggered)
