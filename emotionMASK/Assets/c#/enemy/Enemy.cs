@@ -79,6 +79,12 @@ public class Enemy : MonoBehaviour,IDamageable
     [SerializeField] private float targetCheckRadius;
     [SerializeField] private LayerMask whatIsTarget;
 
+    [Header("受击相关")]
+    [SerializeField] private Vector2 knockbackForce;
+    [SerializeField] private float knockbackDuration = .2f;
+    private bool isknockback;
+    private Coroutine knockbackCoroutine;
+
 
     //states
     public Enemy_IdleState idleState { get; private set;}
@@ -233,7 +239,8 @@ public class Enemy : MonoBehaviour,IDamageable
         
         if (isDead)
             return;
-        
+
+        ReciveKnockback(knockbackForce *-transform.localScale.x , knockbackDuration);
         ReduceHP(damage);
     }
     protected void ReduceHP(float amount)
@@ -247,6 +254,36 @@ public class Enemy : MonoBehaviour,IDamageable
     {
         isDead = true;
     }
+
+    public void ReciveKnockback(Vector2 knockback, float duration)
+    {
+        if(knockbackCoroutine != null)
+            StopCoroutine(knockbackCoroutine);
+
+        knockbackCoroutine = StartCoroutine(KnockbackCoroutine(knockback, duration));
+    }
+
+
+    private IEnumerator KnockbackCoroutine(Vector2 knockback, float duration)
+    {
+        isknockback = true;
+        rb.velocity = knockback;
+
+        yield return new WaitForSeconds(duration);
+
+        SetZeroVelocity();
+        isknockback = false;
+    }
+
+    //private Vector2 CalculateKnockback(Transform damageDealer)
+    //{
+    //    int direction = damageDealer.position.x > transform.position.x ? 1 : -1;
+
+    //    Vector2 knockBack = knockbackForce;
+    //    knockBack.x *= direction;
+
+    //    return knockBack;
+    //}
 
 
 
@@ -267,6 +304,9 @@ public class Enemy : MonoBehaviour,IDamageable
 
     public void SetVelocity(float x, float y)
     {
+        if (isknockback)
+            return;
+
         rb.velocity = new Vector2(x, y);
     }
 
