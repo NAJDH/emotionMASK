@@ -82,7 +82,7 @@ public static class playerStateManager
             playerHP = 0;
             isDead = true;
         }
-        Debug.Log("玩家受到 " + basedamage + " 点伤害，当前血量：" + playerHP);
+        // Debug.Log("玩家受到 " + basedamage + " 点伤害，当前血量：" + playerHP);
         }
     }
 }

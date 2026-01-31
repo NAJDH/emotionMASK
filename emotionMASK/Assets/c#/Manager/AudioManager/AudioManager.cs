@@ -48,22 +48,7 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
         audiosDic = new Dictionary<string, AudioSource>();
-        // foreach (Sound sound in sounds)
-        // {
-        //     AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        //     audioSource.clip = sound.clip;
-        //     audioSource.outputAudioMixerGroup = sound.outputGroup;
-        //     audioSource.volume = sound.volume;
-        //     audioSource.loop = sound.loop;
-        //     audiosDic.Add(sound.clip.name, audioSource);
-        //     if (sound.PlayerOnAwake)
-        //     {
-        //         audioSource.Play();
-        //     }
-        // }
-    }
-    private void Start()
-    {
+
         foreach (Sound sound in sounds)
         {
             GameObject obj = new GameObject(sound.clip.name);
@@ -80,6 +65,9 @@ public class AudioManager : MonoBehaviour
                 source.Play();
             }
         }
+    }
+    private void Start()
+    {
     }
     /// <summary>
     /// 播放音频
